@@ -38,12 +38,12 @@
         }
         .navbar.scrolled { background: rgba(2,6,23,0.97); box-shadow: 0 1px 20px rgba(0,0,0,0.25); }
         .navbar-brand { font-weight: 800; font-size: 1.1rem; letter-spacing: -0.3px; display: flex; align-items: center; gap: 10px; }
-        .nav-link {
+        .navbar .nav-link {
             color: rgba(255,255,255,0.75) !important; font-weight: 500; font-size: .875rem;
             padding: 8px 14px !important; border-radius: 8px; transition: all .2s; letter-spacing: -0.2px; margin: 0 1px;
             text-decoration: none !important;
         }
-        .nav-link:hover, .nav-link.active { color: #fff !important; background: rgba(255,255,255,0.08); text-decoration: none !important; }
+        .navbar .nav-link:hover, .navbar .nav-link.active { color: #fff !important; background: rgba(255,255,255,0.08); text-decoration: none !important; }
         .btn-nav {
             background: linear-gradient(135deg, var(--c-primary), var(--c-accent)); border: none;
             color: #fff !important; font-weight: 600; padding: 9px 20px; border-radius: 50px;
