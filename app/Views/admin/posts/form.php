@@ -58,7 +58,7 @@
                 </div>
                 <div class="col-12">
                     <label class="form-label required">Konten</label>
-                    <textarea name="content" class="form-control" rows="18"><?= old('content', $post->content ?? '') ?></textarea>
+                    <textarea name="content" class="form-control ckeditor" rows="18"><?= old('content', $post->content ?? '') ?></textarea>
                 </div>
                 <div class="col-12">
                     <div class="hr-text">SEO</div>

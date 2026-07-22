@@ -17,6 +17,9 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
 $routes->group('admin', ['filter' => 'auth'], function ($routes) {
     $routes->get('/', 'DashboardController::index');
 
+    // CKEditor upload
+    $routes->post('upload/image', 'UploadController::image');
+
     // Posts
     $routes->get('posts', 'PostController::index');
     $routes->get('posts/create', 'PostController::create');

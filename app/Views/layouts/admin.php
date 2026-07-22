@@ -80,14 +80,22 @@
     <script src="https://cdn.jsdelivr.net/npm/datatables@1.10.18/media/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/43.0.0/ckeditor5.umd.js"></script>
     <script>
-        function confirmDelete(url, title) {
-            Swal.fire({ title: title || 'Hapus data?', text: 'Tindakan ini tidak dapat dibatalkan.', icon: 'warning', showCancelButton: true, confirmButtonColor: '#d33', confirmButtonText: 'Ya, Hapus', cancelButtonText: 'Batal' }).then(r => { if (r.isConfirmed) location.href = url });
-        }
-        $(function() {
-            $('.datatable').each(function() {
-                $(this).DataTable({ pageLength: 25, language: { search: 'Cari:', lengthMenu: 'Tampilkan _MENU_', info: '_START_-_END_ dari _TOTAL_', paginate: { first: '«', last: '»', next: '›', previous: '‹' } } });
-            });
+        // Global CKEditor 5 init on all .ckeditor textareas
+        const { ClassicEditor, Essentials, Bold, Italic, Underline, Strikethrough, Font, Paragraph, Heading, Alignment, List, Link, Image, ImageUpload, BlockQuote, Table, MediaEmbed, Code, CodeBlock, HorizontalLine, RemoveFormat, SourceEditing } = CKEDITOR;
+        document.querySelectorAll('.ckeditor').forEach(el => {
+            ClassicEditor.create(el, {
+                licenseKey: 'GPL',
+                plugins: [Essentials, Bold, Italic, Underline, Strikethrough, Font, Paragraph, Heading, Alignment, List, Link, Image, ImageUpload, BlockQuote, Table, MediaEmbed, Code, CodeBlock, HorizontalLine, RemoveFormat, SourceEditing],
+                toolbar: ['heading', '|', 'bold','italic','underline','strikethrough','removeFormat', '|', 'alignment', '|', 'bulletedList','numberedList', '|', 'link','imageUpload','mediaEmbed','blockQuote','table', '|', 'code','codeBlock','horizontalLine', '|', 'sourceEditing'],
+                simpleUpload: { uploadUrl: '/admin/upload/image' }
+            }).catch(e => console.log('CKEditor init error:', e));
         });
+
+        // Confirm delete with SweetAlert2
+        function confirmDelete(url, title) { Swal.fire({ title: title || 'Hapus data?', text: 'Tindakan ini tidak dapat dibatalkan.', icon: 'warning', showCancelButton: true, confirmButtonColor: '#d33', confirmButtonText: 'Ya, Hapus', cancelButtonText: 'Batal' }).then(r => { if (r.isConfirmed) location.href = url }); }
+
+        // DataTables auto-init
+        $(function() { $('.datatable').each(function() { $(this).DataTable({ pageLength: 25, language: { search: 'Cari:', lengthMenu: 'Tampilkan _MENU_', info: '_START_-_END_ dari _TOTAL_', paginate: { first: '«', last: '»', next: '›', previous: '‹' } } }); }); });
     </script>
     <?= $this->renderSection('scripts') ?>
 </body>

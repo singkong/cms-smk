@@ -20,10 +20,10 @@
                         foreach ($fields as $key => $label): ?>
                         <div class="col-md-6"><label class="form-label"><?= $label ?></label><input type="text" name="<?= $key ?>" class="form-control" value="<?= esc($setting->$key ?? '') ?>"></div>
                         <?php endforeach; ?>
-                        <div class="col-md-12"><label class="form-label">Sambutan Kepala Sekolah</label><textarea name="sambutan" class="form-control" rows="4"><?= esc($setting->sambutan ?? '') ?></textarea></div>
-                        <div class="col-md-6"><label class="form-label">Visi</label><textarea name="visi" class="form-control" rows="3"><?= esc($setting->visi ?? '') ?></textarea></div>
-                        <div class="col-md-6"><label class="form-label">Misi</label><textarea name="misi" class="form-control" rows="3"><?= esc($setting->misi ?? '') ?></textarea></div>
-                        <div class="col-md-12"><label class="form-label">Sejarah</label><textarea name="sejarah" class="form-control" rows="4"><?= esc($setting->sejarah ?? '') ?></textarea></div>
+                        <div class="col-md-12"><label class="form-label">Sambutan Kepala Sekolah</label><textarea name="sambutan" class="form-control ckeditor" rows="4"><?= esc($setting->sambutan ?? '') ?></textarea></div>
+                        <div class="col-md-6"><label class="form-label">Visi</label><textarea name="visi" class="form-control ckeditor" rows="3"><?= esc($setting->visi ?? '') ?></textarea></div>
+                        <div class="col-md-6"><label class="form-label">Misi</label><textarea name="misi" class="form-control ckeditor" rows="3"><?= esc($setting->misi ?? '') ?></textarea></div>
+                        <div class="col-md-12"><label class="form-label">Sejarah</label><textarea name="sejarah" class="form-control ckeditor" rows="4"><?= esc($setting->sejarah ?? '') ?></textarea></div>
                         <div class="col-12"><label class="form-label">Deskripsi Singkat</label><textarea name="deskripsi" class="form-control" rows="2"><?= esc($setting->deskripsi ?? '') ?></textarea></div>
                         <div class="col-md-4"><label class="form-label">Logo</label><input type="file" name="logo" class="form-control" accept="image/*"></div>
                         <div class="col-md-4"><label class="form-label">Favicon</label><input type="file" name="favicon" class="form-control" accept="image/*"></div>
