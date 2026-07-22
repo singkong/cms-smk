@@ -45,82 +45,32 @@
 </head>
 <body>
     <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
+
     <div class="page">
-        <aside class="navbar navbar-vertical navbar-expand-lg navbar-dark">
-            <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu"><span class="navbar-toggler-icon"></span></button>
-                <h1 class="navbar-brand navbar-brand-autodark">
-                    <a href="/dashboard" class="text-decoration-none text-white d-flex align-items-center gap-2">
-                        <span class="avatar avatar-sm bg-primary rounded-3 fw-bold"><?= strtoupper(substr($setting->nama_singkat??'S',0,1)) ?></span>
-                        <span class="fw-bold"><?= esc($setting->nama_singkat ?? 'CMS') ?></span>
-                    </a>
-                </h1>
-                <div class="collapse navbar-collapse" id="sidebar-menu">
-                    <ul class="navbar-nav pt-2">
-                        <li class="nav-item"><a class="nav-link <?= $current_uri==='dashboard'?'active':'' ?>" href="/dashboard"><span class="nav-link-icon"><i class="ti ti-dashboard icon"></i></span>Dashboard</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle <?= str_starts_with($current_uri,'admin/posts')||str_starts_with($current_uri,'admin/categories')||str_starts_with($current_uri,'admin/tags')||str_starts_with($current_uri,'admin/comments')?'show':'' ?>" href="#nav-content" data-bs-toggle="dropdown"><span class="nav-link-icon"><i class="ti ti-article icon"></i></span>Konten</a>
-                            <div class="dropdown-menu <?= str_starts_with($current_uri,'admin/posts')||str_starts_with($current_uri,'admin/categories')||str_starts_with($current_uri,'admin/tags')||str_starts_with($current_uri,'admin/comments')?'show':'' ?>">
-                                <a class="dropdown-item <?= str_starts_with($current_uri,'admin/posts')?'active':'' ?>" href="/admin/posts">Postingan</a>
-                                <a class="dropdown-item <?= $current_uri==='admin/categories'?'active':'' ?>" href="/admin/categories">Kategori</a>
-                                <a class="dropdown-item <?= str_starts_with($current_uri,'admin/tags')?'active':'' ?>" href="/admin/tags">Tag</a>
-                                <a class="dropdown-item <?= str_starts_with($current_uri,'admin/comments')?'active':'' ?>" href="/admin/comments">Komentar</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle <?= str_starts_with($current_uri,'admin/gallery')||str_starts_with($current_uri,'admin/videos')?'show':'' ?>" href="#nav-media" data-bs-toggle="dropdown"><span class="nav-link-icon"><i class="ti ti-photo icon"></i></span>Media</a>
-                            <div class="dropdown-menu"><a class="dropdown-item" href="/admin/gallery">Galeri Foto</a><a class="dropdown-item" href="/admin/albums">Album</a><a class="dropdown-item" href="/admin/videos">Video</a></div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle <?= str_starts_with($current_uri,'admin/guru')||str_starts_with($current_uri,'admin/staff')||str_starts_with($current_uri,'admin/jurusan')||str_starts_with($current_uri,'admin/fasilitas')||str_starts_with($current_uri,'admin/alumni')||str_starts_with($current_uri,'admin/sliders')||str_starts_with($current_uri,'admin/partners')||str_starts_with($current_uri,'admin/testimoni')||str_starts_with($current_uri,'admin/faq')?'show':'' ?>" href="#nav-master" data-bs-toggle="dropdown"><span class="nav-link-icon"><i class="ti ti-database icon"></i></span>Master Data</a>
-                            <div class="dropdown-menu <?= str_starts_with($current_uri,'admin/guru')||str_starts_with($current_uri,'admin/staff')||str_starts_with($current_uri,'admin/jurusan')||str_starts_with($current_uri,'admin/fasilitas')||str_starts_with($current_uri,'admin/alumni')||str_starts_with($current_uri,'admin/sliders')||str_starts_with($current_uri,'admin/partners')||str_starts_with($current_uri,'admin/testimoni')||str_starts_with($current_uri,'admin/faq')?'show':'' ?>">
-                                <a class="dropdown-item" href="/admin/guru">Guru</a><a class="dropdown-item" href="/admin/staff">Staff</a>
-                                <a class="dropdown-item" href="/admin/jurusan">Jurusan</a><a class="dropdown-item" href="/admin/fasilitas">Fasilitas</a>
-                                <a class="dropdown-item" href="/admin/alumni">Alumni</a><a class="dropdown-item" href="/admin/sliders">Slider</a>
-                                <a class="dropdown-item" href="/admin/partners">Partner</a><a class="dropdown-item" href="/admin/testimoni">Testimoni</a>
-                                <a class="dropdown-item" href="/admin/faq">FAQ</a>
-                            </div>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="/admin/downloads"><span class="nav-link-icon"><i class="ti ti-download icon"></i></span>Download</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/admin/menus"><span class="nav-link-icon"><i class="ti ti-menu-2 icon"></i></span>Menu</a></li>
-                        <li class="nav-item"><a class="nav-link <?= str_starts_with($current_uri,'admin/ppdb')?'active':'' ?>" href="/admin/ppdb"><span class="nav-link-icon"><i class="ti ti-school icon"></i></span>PPDB</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle <?= str_starts_with($current_uri,'admin/users')||str_starts_with($current_uri,'admin/roles')||str_starts_with($current_uri,'admin/contacts')||str_starts_with($current_uri,'admin/visitors')||str_starts_with($current_uri,'admin/logs')?'show':'' ?>" href="#nav-mgmt" data-bs-toggle="dropdown"><span class="nav-link-icon"><i class="ti ti-settings icon"></i></span>Manajemen</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/admin/users">Pengguna</a><a class="dropdown-item" href="/admin/roles">Role & Permission</a>
-                                <a class="dropdown-item" href="/admin/contacts">Pesan Masuk</a>
-                                <a class="dropdown-item" href="/admin/visitors">Pengunjung</a><a class="dropdown-item" href="/admin/logs">Log Aktivitas</a>
-                            </div>
-                        </li>
-                        <li class="nav-item"><a class="nav-link <?= $current_uri==='admin/settings'?'active':'' ?>" href="/admin/settings"><span class="nav-link-icon"><i class="ti ti-adjustments icon"></i></span>Pengaturan</a></li>
-                        <li class="nav-item mt-3"><a class="nav-link" href="/" target="_blank"><span class="nav-link-icon"><i class="ti ti-eye icon"></i></span>Lihat Website</a></li>
-                        <li class="nav-item"><a class="nav-link text-danger" href="/logout"><span class="nav-link-icon"><i class="ti ti-logout icon"></i></span>Logout</a></li>
-                    </ul>
-                </div>
-            </div>
-        </aside>
+        <?= view('admin/partials/sidebar', $this->data) ?>
+
         <div class="page-wrapper">
-            <div class="page-header d-print-none">
-                <div class="container-xl">
-                    <div class="row g-2 align-items-center">
-                        <div class="col"><div class="page-pretitle"><?= $this->renderSection('pretitle') ?? 'Overview' ?></div><h2 class="page-title"><?= esc($title ?? 'Dashboard') ?></h2></div>
-                        <div class="col-auto ms-auto d-print-none">
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="d-none d-md-block text-end"><div class="fw-semibold small"><?= esc(session()->get('full_name')) ?></div><div class="text-muted" style="font-size:.75rem;"><?php $rn=['superadmin'=>'Super Admin','admin'=>'Admin','operator'=>'Operator','editor'=>'Editor','guru'=>'Guru'];$r=session()->get('roles')??[];echo esc(implode(', ',array_map(fn($x)=>$rn[$x]??$x,$r))); ?></div></div>
-                                <span class="avatar avatar-sm bg-primary rounded-3 fw-bold"><?= strtoupper(substr(session()->get('full_name')??'U',0,1)) ?></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?= view('admin/partials/header', $this->data) ?>
+
             <div class="page-body">
                 <div class="container-xl">
-                    <?php if(session()->getFlashdata('success')): ?><div class="alert alert-success alert-dismissible"><div class="d-flex"><i class="ti ti-check icon me-2"></i><div><?= session()->getFlashdata('success') ?></div></div><a class="btn-close" data-bs-dismiss="alert"></a></div><?php endif; ?>
-                    <?php if(session()->getFlashdata('error')): ?><div class="alert alert-danger alert-dismissible"><div class="d-flex"><i class="ti ti-alert-circle icon me-2"></i><div><?= session()->getFlashdata('error') ?></div></div><a class="btn-close" data-bs-dismiss="alert"></a></div><?php endif; ?>
+                    <?php if (session()->getFlashdata('success')): ?>
+                    <div class="alert alert-success alert-dismissible">
+                        <div class="d-flex"><i class="ti ti-check icon me-2"></i><div><?= session()->getFlashdata('success') ?></div></div>
+                        <a class="btn-close" data-bs-dismiss="alert"></a>
+                    </div>
+                    <?php endif; ?>
+                    <?php if (session()->getFlashdata('error')): ?>
+                    <div class="alert alert-danger alert-dismissible">
+                        <div class="d-flex"><i class="ti ti-alert-circle icon me-2"></i><div><?= session()->getFlashdata('error') ?></div></div>
+                        <a class="btn-close" data-bs-dismiss="alert"></a>
+                    </div>
+                    <?php endif; ?>
                     <?= $this->renderSection('content') ?>
                 </div>
             </div>
-            <footer class="footer footer-transparent d-print-none"><div class="container-xl"><div class="text-center"><small class="text-muted">&copy; <?= date('Y') ?> <?= esc($setting->nama_sekolah??'') ?>. v1.0</small></div></div></footer>
+
+            <?= view('admin/partials/footer', $this->data) ?>
         </div>
     </div>
 
@@ -130,8 +80,14 @@
     <script src="https://cdn.jsdelivr.net/npm/datatables@1.10.18/media/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/43.0.0/ckeditor5.umd.js"></script>
     <script>
-        function confirmDelete(u,t){Swal.fire({title:t||'Hapus data?',text:'Tindakan ini tidak dapat dibatalkan.',icon:'warning',showCancelButton:true,confirmButtonColor:'#d33',confirmButtonText:'Ya, Hapus',cancelButtonText:'Batal'}).then(r=>{if(r.isConfirmed)location.href=u})}
-        $(function(){$('.datatable').each(function(){$(this).DataTable({pageLength:25,language:{search:'Cari:',lengthMenu:'Tampilkan _MENU_',info:'_START_-_END_ dari _TOTAL_',paginate:{first:'«',last:'»',next:'›',previous:'‹'}}})})});
+        function confirmDelete(url, title) {
+            Swal.fire({ title: title || 'Hapus data?', text: 'Tindakan ini tidak dapat dibatalkan.', icon: 'warning', showCancelButton: true, confirmButtonColor: '#d33', confirmButtonText: 'Ya, Hapus', cancelButtonText: 'Batal' }).then(r => { if (r.isConfirmed) location.href = url });
+        }
+        $(function() {
+            $('.datatable').each(function() {
+                $(this).DataTable({ pageLength: 25, language: { search: 'Cari:', lengthMenu: 'Tampilkan _MENU_', info: '_START_-_END_ dari _TOTAL_', paginate: { first: '«', last: '»', next: '›', previous: '‹' } } });
+            });
+        });
     </script>
     <?= $this->renderSection('scripts') ?>
 </body>
