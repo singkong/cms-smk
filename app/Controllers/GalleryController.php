@@ -11,7 +11,7 @@ class GalleryController extends BaseController
     {
         $data = $this->data;
         $data['title'] = 'Galeri Foto';
-        $data['galleries'] = model(GalleryModel::class)->orderBy('created_at', 'DESC')->findAll(50);
+        $data['items'] = model(GalleryModel::class)->orderBy('created_at', 'DESC')->findAll(50);
         $data['albums'] = model(AlbumModel::class)->where('type', 'photo')->findAll();
         return view('admin/gallery/index', $data);
     }
