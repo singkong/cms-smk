@@ -56,7 +56,7 @@
             overflow: hidden;
         }
         .hero { min-height: 85vh; }
-        .home-hero { min-height: 92vh; }
+        .home-hero { min-height: 100vh; }
         .hero::before, .home-hero::before {
             content: ''; position: absolute; inset: 0;
             background: radial-gradient(ellipse at 20% 80%, rgba(37,99,235,0.22) 0%, transparent 55%),

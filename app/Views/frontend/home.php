@@ -2,7 +2,7 @@
 <?= $this->section('content') ?>
 
 <!-- ===== HERO ===== -->
-<section class="home-hero" id="heroParticles" style="min-height:92vh;">
+<section class="home-hero" id="heroParticles">
     <?php for($i=0;$i<35;$i++): ?><span class="hero-dot" style="left:<?= rand(0,100) ?>%;top:<?= rand(0,100) ?>%;animation-delay:<?= rand(0,70)/10 ?>s;animation-duration:<?= 5+rand(0,40)/10 ?>s;"></span><?php endfor; ?>
     <?php if (!empty($sliders)): ?>
     <div class="swiper heroSwiper"><div class="swiper-wrapper">
