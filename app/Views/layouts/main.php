@@ -87,7 +87,7 @@
         @keyframes floatP { 0%,100% { transform: translateY(0) scale(1); opacity: .3; } 50% { transform: translateY(-30px) scale(2); opacity: 1; } }
 
         /* ── SECTIONS ── */
-        section { padding: 80px 0; }
+        section { padding: 0 0 80px 0; }
         .section-label {
             display: inline-block; padding: 4px 14px; background: rgba(37,99,235,0.06);
             color: var(--c-primary); border-radius: 50px; font-size: .7rem; font-weight: 700;
@@ -175,7 +175,7 @@
 
         @media (max-width: 768px) {
             .hero { min-height: 60vh; } .kepsek-card { flex-direction: column; text-align: center; padding: 20px; }
-            section { padding: 50px 0; } .section-header { margin-bottom: 28px; }
+            section { padding: 0 0 50px 0; } .section-header { margin-bottom: 28px; }
             .hero-content { padding: 30px 0; }
         }
     </style>
