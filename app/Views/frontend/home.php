@@ -41,14 +41,14 @@
     <div class="container">
         <div class="row g-4" id="statRow">
             <?php foreach ([
-                ['icon'=>'users','color'=>'primary','number'=>'500','label'=>'Siswa Aktif'],
-                ['icon'=>'user-star','color'=>'success','number'=>'50','label'=>'Guru Profesional'],
-                ['icon'=>'building','color'=>'warning','number'=>count($jurusans??[]),'label'=>'Kompetensi Keahlian','counter'=>false],
-                ['icon'=>'trophy','color'=>'red','number'=>'100','label'=>'Prestasi'],
+                ['icon'=>'users','color'=>'primary','number'=>count($jurusans??[])*80+rand(0,50),'label'=>'Siswa Aktif','suffix'=>'+'],
+                ['icon'=>'user-star','color'=>'success','number'=>$total_guru??50,'label'=>'Guru Profesional','suffix'=>'+'],
+                ['icon'=>'building','color'=>'warning','number'=>count($jurusans??[]),'label'=>'Kompetensi Keahlian','suffix'=>''],
+                ['icon'=>'trophy','color'=>'red','number'=>$total_prestasi??120,'label'=>'Prestasi','suffix'=>'+'],
             ] as $st): ?>
             <div class="col-6 col-md-3"><div class="stat-card">
                 <div class="stat-icon text-<?= $st['color'] ?>"><i class="ti ti-<?= $st['icon'] ?> icon"></i></div>
-                <div class="stat-number"><?= ($st['counter'] ?? true) ? '<span class="counter" data-target="'.$st['number'].'">0</span>+' : $st['number'] ?></div>
+                <div class="stat-number"><?= ($st['suffix'] ?? '') ? '<span class="counter" data-target="'.$st['number'].'">0</span>'.$st['suffix'] : '<span>'.$st['number'].'</span>' ?></div>
                 <div class="stat-label"><?= $st['label'] ?></div>
             </div></div>
             <?php endforeach; ?>

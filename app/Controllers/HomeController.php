@@ -19,6 +19,9 @@ class HomeController extends BaseController
         $data['testimoni'] = $this->db->table('testimoni')->where('is_active', 1)->limit(6)->get()->getResult();
         $data['pengumuman'] = $this->db->table('posts')->where('type', 'pengumuman')->where('status', 'published')->orderBy('created_at', 'DESC')->limit(5)->get()->getResult();
         $data['galeri_home'] = $this->db->table('gallery')->orderBy('id', 'DESC')->limit(8)->get()->getResult();
+        $data['total_guru'] = $this->db->table('guru')->where('is_active', 1)->countAllResults();
+        $data['total_alumni'] = $this->db->table('alumni')->countAllResults();
+        $data['total_prestasi'] = $this->db->table('posts')->where('type', 'prestasi')->where('status', 'published')->countAllResults();
         return view('frontend/home', $data);
     }
 
