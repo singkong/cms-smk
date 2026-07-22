@@ -44,6 +44,9 @@
             text-decoration: none !important;
         }
         .navbar .nav-link:hover, .navbar .nav-link.active { color: #fff !important; background: rgba(255,255,255,0.08); text-decoration: none !important; }
+        .navbar .dropdown-menu { background: rgba(15,23,42,0.95); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 6px; margin-top: 8px; }
+        .navbar .dropdown-item { color: rgba(255,255,255,0.75); border-radius: 6px; font-size: .85rem; padding: 8px 14px; }
+        .navbar .dropdown-item:hover, .navbar .dropdown-item.active { background: rgba(255,255,255,0.08); color: #fff; }
         .btn-nav {
             background: linear-gradient(135deg, var(--c-primary), var(--c-accent)); border: none;
             color: #fff !important; font-weight: 600; padding: 9px 20px; border-radius: 50px;
@@ -196,7 +199,15 @@
             <div class="collapse navbar-collapse" id="nb">
                 <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item"><a class="nav-link <?= uri_string()==''?'active':'' ?>" href="/">Beranda</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/profil">Profil</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle <?= in_array(uri_string(), ['profil','visi-misi','sejarah','guru-staff']) ? 'active' : '' ?>" href="#" data-bs-toggle="dropdown">Profil</a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item <?= uri_string()=='profil'?'active':'' ?>" href="/profil">Profil Sekolah</a></li>
+                            <li><a class="dropdown-item <?= uri_string()=='visi-misi'?'active':'' ?>" href="/visi-misi">Visi & Misi</a></li>
+                            <li><a class="dropdown-item <?= uri_string()=='sejarah'?'active':'' ?>" href="/sejarah">Sejarah</a></li>
+                            <li><a class="dropdown-item <?= uri_string()=='guru-staff'?'active':'' ?>" href="/guru-staff">Guru & Staff</a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="/jurusan">Jurusan</a></li>
                     <li class="nav-item"><a class="nav-link" href="/berita">Berita</a></li>
                     <li class="nav-item"><a class="nav-link" href="/pengumuman">Pengumuman</a></li>
