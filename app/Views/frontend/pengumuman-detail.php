@@ -7,7 +7,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Beranda</a></li>
                 <li class="breadcrumb-item"><a href="/pengumuman">Pengumuman</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><?= esc(character_limiter($post->title, 50)) ?></li>
+                <li class="breadcrumb-item active" aria-current="page"><?= esc($post->title) ?></li>
             </ol>
         </nav>
 
