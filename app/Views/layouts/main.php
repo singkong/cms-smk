@@ -12,8 +12,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* existing styles from main.php */
-    </style>
         :root {
             --c-primary: #2563eb; --c-primary-dark: #1d4ed8; --c-accent: #7c3aed;
             --c-dark: #0f172a; --c-darker: #020617;
