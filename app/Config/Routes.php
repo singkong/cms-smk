@@ -185,7 +185,7 @@ $routes->get('/prestasi/(:segment)', 'HomeController::prestasiDetail/$1');
 $routes->get('/galeri', 'HomeController::galeri');
 $routes->get('/galeri-video', 'HomeController::galeriVideo');
 $routes->get('/download', 'HomeController::download');
-$routes->get('/download/file/(:num)', 'HomeController::downloadFile/$1');
+$routes->get('/download/file/(:num)', 'HomeController::downloadDetail/$1');
 $routes->get('/download/detail/(:num)', 'HomeController::downloadDetail/$1');
 $routes->get('/alumni', 'HomeController::alumni');
 $routes->get('/kontak', 'HomeController::kontak');

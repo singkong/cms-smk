@@ -300,11 +300,17 @@ class HomeController extends BaseController
         $file = $this->db->table('downloads')->where('id', $id)->get()->getRow();
         if (!$file) return redirect()->to('/download');
         $this->db->table('downloads')->where('id', $id)->set('downloads', 'downloads + 1', false)->update();
-        $filePath = FCPATH . ltrim($file->file, '/');
-        if (is_file($filePath)) {
+
+        $filePath = FCPATH . 'uploads/downloads/' . $file->file;
+        if ($file->file && is_file($filePath)) {
             return $this->response->download($filePath, null);
         }
-        return redirect()->to($file->file);
+
+        if ($file->file) {
+            return redirect()->to(base_url('uploads/downloads/' . $file->file));
+        }
+
+        return redirect()->back()->with('error', 'File belum tersedia.');
     }
 
     public function alumni()
