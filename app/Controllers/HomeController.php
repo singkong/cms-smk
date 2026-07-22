@@ -310,7 +310,7 @@ class HomeController extends BaseController
             return redirect()->to(base_url('uploads/downloads/' . $file->file));
         }
 
-        return redirect()->back()->with('error', 'File belum tersedia.');
+        return redirect()->to('/download')->with('error', 'File belum tersedia.');
     }
 
     public function alumni()
