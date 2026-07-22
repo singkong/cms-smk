@@ -1,25 +1,9 @@
-<style>
-.nav-accordion .accordion-button { background: transparent; color: #94a3b8 !important; border: none; border-radius: 8px !important; font-size: .88rem; font-weight: 500; padding: 10px 14px; letter-spacing: -0.2px; box-shadow: none !important; }
-.nav-accordion .accordion-button::after { filter: invert(0.5); width: .7rem; height: .7rem; background-size: .7rem; }
-.nav-accordion .accordion-button:not(.collapsed) { background: rgba(255,255,255,0.05); color: #fff !important; }
-.nav-accordion .accordion-button:not(.collapsed)::after { filter: invert(1); }
-.nav-accordion .accordion-button:hover { background: rgba(255,255,255,0.04); color: #fff !important; }
-.nav-accordion .accordion-body { padding: 2px 8px 6px; }
-.nav-accordion .accordion-body .nav-link { margin: 1px 0; padding: 8px 14px 8px 36px !important; font-size: .84rem; color: #94a3b8 !important; border-radius: 6px; display: flex; align-items: center; gap: 8px; }
-.nav-accordion .accordion-body .nav-link:hover { background: rgba(255,255,255,0.04); color: #fff !important; }
-.nav-accordion .accordion-body .nav-link.active { background: linear-gradient(135deg, rgba(37,99,235,0.25), rgba(124,58,237,0.15)); color: #fff !important; font-weight: 600; }
-.nav-accordion .accordion-item { background: transparent; border: none; }
-.nav-link-normal { display: flex; align-items: center; gap: 12px; padding: 10px 14px !important; border-radius: 8px; margin: 2px 8px; font-size: .88rem; font-weight: 500; color: #94a3b8 !important; text-decoration: none; transition: all .2s; }
-.nav-link-normal:hover { background: rgba(255,255,255,0.04); color: #fff !important; }
-.nav-link-normal.active { background: linear-gradient(135deg, rgba(37,99,235,0.25), rgba(124,58,237,0.15)); color: #fff !important; font-weight: 600; }
-.nav-link-normal i { font-size: 1.1rem; width: 22px; text-align: center; }
-</style>
-
 <aside class="navbar navbar-vertical navbar-expand-lg navbar-dark">
     <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sb-menu">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <h1 class="navbar-brand navbar-brand-autodark">
             <a href="/dashboard" class="text-decoration-none text-white d-flex align-items-center gap-2">
                 <span class="avatar avatar-sm bg-primary rounded-3 fw-bold"><?= strtoupper(substr($setting->nama_singkat ?? 'S', 0, 1)) ?></span>
@@ -27,111 +11,136 @@
             </a>
         </h1>
 
-        <div class="collapse navbar-collapse" id="sidebar-menu">
-            <?php
-                $isKonten  = str_starts_with($current_uri, 'admin/posts') || str_starts_with($current_uri, 'admin/categories') || str_starts_with($current_uri, 'admin/tags') || str_starts_with($current_uri, 'admin/comments');
-                $isMedia   = str_starts_with($current_uri, 'admin/gallery') || str_starts_with($current_uri, 'admin/videos') || str_starts_with($current_uri, 'admin/albums');
-                $isMaster  = str_starts_with($current_uri, 'admin/guru') || str_starts_with($current_uri, 'admin/staff') || str_starts_with($current_uri, 'admin/jurusan') || str_starts_with($current_uri, 'admin/fasilitas') || str_starts_with($current_uri, 'admin/alumni') || str_starts_with($current_uri, 'admin/sliders') || str_starts_with($current_uri, 'admin/partners') || str_starts_with($current_uri, 'admin/testimoni') || str_starts_with($current_uri, 'admin/faq');
-                $isMgmt    = str_starts_with($current_uri, 'admin/users') || str_starts_with($current_uri, 'admin/roles') || str_starts_with($current_uri, 'admin/contacts') || str_starts_with($current_uri, 'admin/visitors') || str_starts_with($current_uri, 'admin/logs');
-            ?>
+        <?php
+            $uri = $current_uri;
+            $active = fn(...$paths) => array_reduce($paths, fn($c, $p) => $c || str_starts_with($uri, $p), false);
+        ?>
 
-            <div class="accordion nav-accordion pt-2" id="sidebarAccordion">
+        <div class="collapse navbar-collapse" id="sb-menu">
+            <ul class="navbar-nav pt-2">
 
-                <!-- Dashboard -->
-                <a class="nav-link-normal <?= $current_uri === 'dashboard' ? 'active' : '' ?>" href="/dashboard">
-                    <i class="ti ti-dashboard icon"></i> Dashboard
-                </a>
+                <li class="nav-item">
+                    <a class="nav-link <?= $uri === 'dashboard' ? 'active' : '' ?>" href="/dashboard">
+                        <i class="ti ti-dashboard icon me-2 fs-5"></i> Dashboard
+                    </a>
+                </li>
 
-                <!-- Konten -->
-                <div class="accordion-item">
-                    <button class="accordion-button <?= $isKonten ? '' : 'collapsed' ?>" type="button" data-bs-toggle="collapse" data-bs-target="#nav-konten">
-                        <i class="ti ti-article icon me-2"></i> Konten
-                    </button>
-                    <div id="nav-konten" class="accordion-collapse collapse <?= $isKonten ? 'show' : '' ?>" data-bs-parent="#sidebarAccordion">
-                        <div class="accordion-body">
-                            <a class="nav-link <?= str_starts_with($current_uri, 'admin/posts') ? 'active' : '' ?>" href="/admin/posts">Postingan</a>
-                            <a class="nav-link <?= $current_uri === 'admin/categories' ? 'active' : '' ?>" href="/admin/categories">Kategori</a>
-                            <a class="nav-link <?= str_starts_with($current_uri, 'admin/tags') ? 'active' : '' ?>" href="/admin/tags">Tag</a>
-                            <a class="nav-link <?= str_starts_with($current_uri, 'admin/comments') ? 'active' : '' ?>" href="/admin/comments">Komentar</a>
+                <li class="nav-item">
+                    <a class="nav-link <?= $active('admin/posts','admin/categories','admin/tags','admin/comments') ? 'active' : '' ?>" 
+                       href="#sb-konten" data-bs-toggle="collapse" role="button" aria-expanded="<?= $active('admin/posts','admin/categories','admin/tags','admin/comments') ? 'true' : 'false' ?>">
+                        <i class="ti ti-article icon me-2 fs-5"></i> Konten
+                        <i class="ti ti-chevron-down icon ms-auto transition"></i>
+                    </a>
+                    <div class="collapse <?= $active('admin/posts','admin/categories','admin/tags','admin/comments') ? 'show' : '' ?>" id="sb-konten">
+                        <div class="ps-3 py-1">
+                            <a class="nav-link small <?= $active('admin/posts') ? 'active' : '' ?>" href="/admin/posts">Postingan</a>
+                            <a class="nav-link small <?= $uri === 'admin/categories' ? 'active' : '' ?>" href="/admin/categories">Kategori</a>
+                            <a class="nav-link small <?= $active('admin/tags') ? 'active' : '' ?>" href="/admin/tags">Tag</a>
+                            <a class="nav-link small <?= $active('admin/comments') ? 'active' : '' ?>" href="/admin/comments">Komentar</a>
                         </div>
                     </div>
-                </div>
+                </li>
 
-                <!-- Media -->
-                <div class="accordion-item">
-                    <button class="accordion-button <?= $isMedia ? '' : 'collapsed' ?>" type="button" data-bs-toggle="collapse" data-bs-target="#nav-media">
-                        <i class="ti ti-photo icon me-2"></i> Media
-                    </button>
-                    <div id="nav-media" class="accordion-collapse collapse <?= $isMedia ? 'show' : '' ?>" data-bs-parent="#sidebarAccordion">
-                        <div class="accordion-body">
-                            <a class="nav-link <?= str_starts_with($current_uri, 'admin/gallery') ? 'active' : '' ?>" href="/admin/gallery">Galeri Foto</a>
-                            <a class="nav-link <?= str_starts_with($current_uri, 'admin/albums') ? 'active' : '' ?>" href="/admin/albums">Album</a>
-                            <a class="nav-link <?= str_starts_with($current_uri, 'admin/videos') ? 'active' : '' ?>" href="/admin/videos">Video</a>
+                <li class="nav-item">
+                    <a class="nav-link <?= $active('admin/gallery','admin/videos','admin/albums') ? 'active' : '' ?>"
+                       href="#sb-media" data-bs-toggle="collapse" role="button" aria-expanded="<?= $active('admin/gallery','admin/videos','admin/albums') ? 'true' : 'false' ?>">
+                        <i class="ti ti-photo icon me-2 fs-5"></i> Media
+                        <i class="ti ti-chevron-down icon ms-auto transition"></i>
+                    </a>
+                    <div class="collapse <?= $active('admin/gallery','admin/videos','admin/albums') ? 'show' : '' ?>" id="sb-media">
+                        <div class="ps-3 py-1">
+                            <a class="nav-link small <?= $active('admin/gallery') ? 'active' : '' ?>" href="/admin/gallery">Galeri Foto</a>
+                            <a class="nav-link small <?= $active('admin/albums') ? 'active' : '' ?>" href="/admin/albums">Album</a>
+                            <a class="nav-link small <?= $active('admin/videos') ? 'active' : '' ?>" href="/admin/videos">Video</a>
                         </div>
                     </div>
-                </div>
+                </li>
 
-                <!-- Master Data -->
-                <div class="accordion-item">
-                    <button class="accordion-button <?= $isMaster ? '' : 'collapsed' ?>" type="button" data-bs-toggle="collapse" data-bs-target="#nav-master">
-                        <i class="ti ti-database icon me-2"></i> Master Data
-                    </button>
-                    <div id="nav-master" class="accordion-collapse collapse <?= $isMaster ? 'show' : '' ?>" data-bs-parent="#sidebarAccordion">
-                        <div class="accordion-body">
-                            <a class="nav-link <?= str_starts_with($current_uri, 'admin/guru') ? 'active' : '' ?>" href="/admin/guru">Guru</a>
-                            <a class="nav-link <?= str_starts_with($current_uri, 'admin/staff') ? 'active' : '' ?>" href="/admin/staff">Staff</a>
-                            <a class="nav-link <?= str_starts_with($current_uri, 'admin/jurusan') ? 'active' : '' ?>" href="/admin/jurusan">Jurusan</a>
-                            <a class="nav-link <?= str_starts_with($current_uri, 'admin/fasilitas') ? 'active' : '' ?>" href="/admin/fasilitas">Fasilitas</a>
-                            <a class="nav-link <?= str_starts_with($current_uri, 'admin/alumni') ? 'active' : '' ?>" href="/admin/alumni">Alumni</a>
-                            <a class="nav-link <?= str_starts_with($current_uri, 'admin/sliders') ? 'active' : '' ?>" href="/admin/sliders">Slider</a>
-                            <a class="nav-link <?= str_starts_with($current_uri, 'admin/partners') ? 'active' : '' ?>" href="/admin/partners">Partner</a>
-                            <a class="nav-link <?= str_starts_with($current_uri, 'admin/testimoni') ? 'active' : '' ?>" href="/admin/testimoni">Testimoni</a>
-                            <a class="nav-link <?= str_starts_with($current_uri, 'admin/faq') ? 'active' : '' ?>" href="/admin/faq">FAQ</a>
+                <li class="nav-item">
+                    <a class="nav-link <?= $active('admin/guru','admin/staff','admin/jurusan','admin/fasilitas','admin/alumni','admin/sliders','admin/partners','admin/testimoni','admin/faq') ? 'active' : '' ?>"
+                       href="#sb-master" data-bs-toggle="collapse" role="button">
+                        <i class="ti ti-database icon me-2 fs-5"></i> Master Data
+                        <i class="ti ti-chevron-down icon ms-auto transition"></i>
+                    </a>
+                    <div class="collapse <?= $active('admin/guru','admin/staff','admin/jurusan','admin/fasilitas','admin/alumni','admin/sliders','admin/partners','admin/testimoni','admin/faq') ? 'show' : '' ?>" id="sb-master">
+                        <div class="ps-3 py-1">
+                            <a class="nav-link small <?= $active('admin/guru') ? 'active' : '' ?>" href="/admin/guru">Guru</a>
+                            <a class="nav-link small <?= $active('admin/staff') ? 'active' : '' ?>" href="/admin/staff">Staff</a>
+                            <a class="nav-link small <?= $active('admin/jurusan') ? 'active' : '' ?>" href="/admin/jurusan">Jurusan</a>
+                            <a class="nav-link small <?= $active('admin/fasilitas') ? 'active' : '' ?>" href="/admin/fasilitas">Fasilitas</a>
+                            <a class="nav-link small <?= $active('admin/alumni') ? 'active' : '' ?>" href="/admin/alumni">Alumni</a>
+                            <a class="nav-link small <?= $active('admin/sliders') ? 'active' : '' ?>" href="/admin/sliders">Slider</a>
+                            <a class="nav-link small <?= $active('admin/partners') ? 'active' : '' ?>" href="/admin/partners">Partner</a>
+                            <a class="nav-link small <?= $active('admin/testimoni') ? 'active' : '' ?>" href="/admin/testimoni">Testimoni</a>
+                            <a class="nav-link small <?= $active('admin/faq') ? 'active' : '' ?>" href="/admin/faq">FAQ</a>
                         </div>
                     </div>
-                </div>
+                </li>
 
-                <!-- Single nav items -->
-                <a class="nav-link-normal <?= str_starts_with($current_uri, 'admin/downloads') ? 'active' : '' ?>" href="/admin/downloads">
-                    <i class="ti ti-download icon"></i> Download
-                </a>
-                <a class="nav-link-normal <?= str_starts_with($current_uri, 'admin/menus') ? 'active' : '' ?>" href="/admin/menus">
-                    <i class="ti ti-menu-2 icon"></i> Menu
-                </a>
-                <a class="nav-link-normal <?= str_starts_with($current_uri, 'admin/ppdb') ? 'active' : '' ?>" href="/admin/ppdb">
-                    <i class="ti ti-school icon"></i> PPDB
-                </a>
+                <li class="nav-item">
+                    <a class="nav-link <?= $active('admin/downloads') ? 'active' : '' ?>" href="/admin/downloads">
+                        <i class="ti ti-download icon me-2 fs-5"></i> Download
+                    </a>
+                </li>
 
-                <!-- Manajemen -->
-                <div class="accordion-item">
-                    <button class="accordion-button <?= $isMgmt ? '' : 'collapsed' ?>" type="button" data-bs-toggle="collapse" data-bs-target="#nav-mgmt">
-                        <i class="ti ti-settings icon me-2"></i> Manajemen
-                    </button>
-                    <div id="nav-mgmt" class="accordion-collapse collapse <?= $isMgmt ? 'show' : '' ?>" data-bs-parent="#sidebarAccordion">
-                        <div class="accordion-body">
-                            <a class="nav-link <?= str_starts_with($current_uri, 'admin/users') ? 'active' : '' ?>" href="/admin/users">Pengguna</a>
-                            <a class="nav-link <?= str_starts_with($current_uri, 'admin/roles') ? 'active' : '' ?>" href="/admin/roles">Role & Permission</a>
-                            <a class="nav-link <?= str_starts_with($current_uri, 'admin/contacts') ? 'active' : '' ?>" href="/admin/contacts">Pesan Masuk</a>
-                            <a class="nav-link <?= str_starts_with($current_uri, 'admin/visitors') ? 'active' : '' ?>" href="/admin/visitors">Pengunjung</a>
-                            <a class="nav-link <?= str_starts_with($current_uri, 'admin/logs') ? 'active' : '' ?>" href="/admin/logs">Log Aktivitas</a>
+                <li class="nav-item">
+                    <a class="nav-link <?= $active('admin/menus') ? 'active' : '' ?>" href="/admin/menus">
+                        <i class="ti ti-menu-2 icon me-2 fs-5"></i> Menu
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link <?= $active('admin/ppdb') ? 'active' : '' ?>" href="/admin/ppdb">
+                        <i class="ti ti-school icon me-2 fs-5"></i> PPDB
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link <?= $active('admin/users','admin/roles','admin/contacts','admin/visitors','admin/logs') ? 'active' : '' ?>"
+                       href="#sb-mgmt" data-bs-toggle="collapse" role="button">
+                        <i class="ti ti-settings icon me-2 fs-5"></i> Manajemen
+                        <i class="ti ti-chevron-down icon ms-auto transition"></i>
+                    </a>
+                    <div class="collapse <?= $active('admin/users','admin/roles','admin/contacts','admin/visitors','admin/logs') ? 'show' : '' ?>" id="sb-mgmt">
+                        <div class="ps-3 py-1">
+                            <a class="nav-link small <?= $active('admin/users') ? 'active' : '' ?>" href="/admin/users">Pengguna</a>
+                            <a class="nav-link small <?= $active('admin/roles') ? 'active' : '' ?>" href="/admin/roles">Role & Permission</a>
+                            <a class="nav-link small <?= $active('admin/contacts') ? 'active' : '' ?>" href="/admin/contacts">Pesan Masuk</a>
+                            <a class="nav-link small <?= $active('admin/visitors') ? 'active' : '' ?>" href="/admin/visitors">Pengunjung</a>
+                            <a class="nav-link small <?= $active('admin/logs') ? 'active' : '' ?>" href="/admin/logs">Log Aktivitas</a>
                         </div>
                     </div>
-                </div>
+                </li>
 
-                <!-- Settings -->
-                <a class="nav-link-normal <?= $current_uri === 'admin/settings' ? 'active' : '' ?>" href="/admin/settings">
-                    <i class="ti ti-adjustments icon"></i> Pengaturan
-                </a>
+                <li class="nav-item">
+                    <a class="nav-link <?= $uri === 'admin/settings' ? 'active' : '' ?>" href="/admin/settings">
+                        <i class="ti ti-adjustments icon me-2 fs-5"></i> Pengaturan
+                    </a>
+                </li>
 
-                <!-- Bottom links -->
-                <a class="nav-link-normal mt-3" href="/" target="_blank">
-                    <i class="ti ti-eye icon"></i> Lihat Website
-                </a>
-                <a class="nav-link-normal text-danger" href="/logout">
-                    <i class="ti ti-logout icon"></i> Logout
-                </a>
+                <li class="nav-item mt-3">
+                    <a class="nav-link" href="/" target="_blank">
+                        <i class="ti ti-eye icon me-2 fs-5"></i> Lihat Website
+                    </a>
+                </li>
 
-            </div>
+                <li class="nav-item">
+                    <a class="nav-link text-danger" href="/logout">
+                        <i class="ti ti-logout icon me-2 fs-5"></i> Logout
+                    </a>
+                </li>
+
+            </ul>
         </div>
     </div>
 </aside>
+
+<style>
+    .navbar-vertical .nav-link { display: flex; align-items: center; border-radius: 8px; margin: 2px 8px; font-size: .88rem; font-weight: 500; padding: 10px 14px; color: #94a3b8 !important; text-decoration: none; transition: background .2s, color .2s; }
+    .navbar-vertical .nav-link:hover { background: rgba(255,255,255,0.05); color: #fff !important; }
+    .navbar-vertical .nav-link.active { background: linear-gradient(135deg, rgba(37,99,235,0.25), rgba(124,58,237,0.15)); color: #fff !important; font-weight: 600; }
+    .navbar-vertical .nav-link.small { font-size: .82rem; padding: 7px 12px 7px 28px; margin: 1px 0; }
+    .navbar-vertical .nav-link .ti-chevron-down.transition { transition: transform .25s ease; font-size: .75rem; opacity: .6; }
+    .navbar-vertical .nav-link[aria-expanded="true"] .ti-chevron-down { transform: rotate(180deg); opacity: 1; }
+    .navbar-vertical .collapse { transition: height .3s ease; }
+</style>
