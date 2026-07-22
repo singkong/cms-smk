@@ -12,4 +12,13 @@ class DownloadController extends GuruController
         $this->folder = 'downloads';
         $this->viewIndex = 'admin/downloads/index';
     }
+
+    public function index()
+    {
+        $data = $this->data;
+        $data['title'] = 'Download';
+        $data['items'] = $this->model->orderBy($this->orderBy)->findAll();
+        $data['categories'] = $this->db->table('download_categories')->orderBy('name', 'ASC')->get()->getResult();
+        return view($this->viewIndex, $data);
+    }
 }
