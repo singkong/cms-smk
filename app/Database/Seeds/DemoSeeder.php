@@ -36,22 +36,22 @@ class DemoSeeder extends Seeder
         $posts = [
             ['title' => 'SMKN 1 Indonesia Raih Juara 1 LKS Tingkat Provinsi Bidang Web Technology', 'type' => 'berita', 'status' => 'published', 'is_featured' => 1, 'is_headline' => 1, 'views' => 245, 'category_id' => 3,
                 'content' => '<p>Tim Web Technology SMKN 1 Indonesia berhasil meraih <strong>Juara 1</strong> dalam ajang Lomba Kompetensi Siswa (LKS) SMK Tingkat Provinsi tahun 2024. Kompetisi yang diadakan di Gedung Graha Pemuda ini diikuti oleh 40 SMK se-provinsi.</p><p>Tim yang terdiri dari Ahmad Rizki (XII RPL 1) dan Siti Nurhaliza (XII RPL 2) berhasil menyelesaikan tantangan membuat aplikasi web full-stack dalam waktu 8 jam. Mereka mengalahkan juara bertahan dari SMKN 2 Surabaya dan SMKN 3 Bandung.</p><blockquote><p>"Kami sangat bangga dengan prestasi ini. Ini membuktikan bahwa lulusan SMK mampu bersaing di tingkat provinsi bahkan nasional," ujar Kepala Sekolah.</p></blockquote><p>Selamat kepada para pemenang! Semoga bisa melanjutkan prestasi ke tingkat nasional.</p>',
-                'excerpt' => 'Tim Web Technology SMKN 1 Indonesia meraih Juara 1 LKS Tingkat Provinsi 2024.', 'user_id' => $uid, 'published_at' => date('Y-m-d H:i:s', strtotime('-2 days'))],
+                'excerpt' => 'Tim Web Technology SMKN 1 Indonesia meraih Juara 1 LKS Tingkat Provinsi 2024.', 'image' => 'post-1.png', 'user_id' => $uid, 'published_at' => date('Y-m-d H:i:s', strtotime('-2 days'))],
             ['title' => 'Pelepasan Siswa Praktik Kerja Industri Tahun Ajaran 2024/2025', 'type' => 'berita', 'status' => 'published', 'is_featured' => 1, 'views' => 189, 'category_id' => 4,
                 'content' => '<p>Sebanyak 350 siswa kelas XII dari 6 kompetensi keahlian resmi dilepas untuk mengikuti <strong>Praktik Kerja Industri (Prakerin)</strong> tahun ajaran 2024/2025. Upacara pelepasan dilaksanakan di lapangan utama sekolah pada Senin pagi.</p><p>Siswa akan ditempatkan di 85 perusahaan mitra selama 6 bulan ke depan, meliputi perusahaan IT, manufaktur, otomotif, perhotelan, dan perbankan.</p><p>Kepala Sekolah dalam sambutannya berpesan, "Jaga nama baik sekolah, tunjukkan kompetensi dan etos kerja yang telah kalian pelajari. Dunia industri menanti kontribusi kalian."</p>',
-                'excerpt' => '350 siswa kelas XII resmi dilepas untuk Praktik Kerja Industri di 85 perusahaan mitra.', 'user_id' => $uid, 'published_at' => date('Y-m-d H:i:s', strtotime('-5 days'))],
+                'excerpt' => '350 siswa kelas XII resmi dilepas untuk Praktik Kerja Industri di 85 perusahaan mitra.', 'image' => 'post-2.png', 'user_id' => $uid, 'published_at' => date('Y-m-d H:i:s', strtotime('-5 days'))],
             ['title' => 'Workshop Implementasi Kurikulum Merdeka Bersama BBPPMPV BMTI', 'type' => 'berita', 'status' => 'published', 'is_featured' => 1, 'views' => 167, 'category_id' => 1,
                 'content' => '<p>SMKN 1 Indonesia menggelar workshop <strong>"Implementasi Kurikulum Merdeka di SMK"</strong> bekerjasama dengan Balai Besar Pengembangan Penjaminan Mutu Pendidikan Vokasi (BBPPMPV) BMTI Cimahi.</p><p>Workshop yang diikuti 85 guru produktif dan adaptif ini membahas:</p><ul><li>Penyusunan modul ajar berbasis proyek</li><li>Asesmen diagnostik dan formatif</li><li>Project Based Learning (PjBL)</li><li>Teaching Factory</li></ul><p>Narasumber dari BBPPMPV, Dr. Hendra Gunawan, M.Pd menyampaikan bahwa SMK harus menjadi ujung tombak implementasi Kurikulum Merdeka karena karakteristik pembelajarannya yang berbasis proyek.</p>',
-                'excerpt' => 'Workshop Kurikulum Merdeka bekerjasama dengan BBPPMPV BMTI diikuti 85 guru.', 'user_id' => $uid, 'published_at' => date('Y-m-d H:i:s', strtotime('-7 days'))],
+                'excerpt' => 'Workshop Kurikulum Merdeka bekerjasama dengan BBPPMPV BMTI diikuti 85 guru.', 'image' => 'post-3.png', 'user_id' => $uid, 'published_at' => date('Y-m-d H:i:s', strtotime('-7 days'))],
             ['title' => 'Kunjungan Industri ke PT Astra Honda Motor', 'type' => 'berita', 'status' => 'published', 'is_headline' => 1, 'views' => 312, 'category_id' => 4,
                 'content' => '<p>Siswa jurusan Teknik Sepeda Motor (TSM) melakukan kunjungan industri ke <strong>PT Astra Honda Motor</strong> Plant Cikarang. Kegiatan ini merupakan bagian dari program link and match sekolah dengan industri.</p><p>Dalam kunjungan ini, siswa melihat langsung proses produksi sepeda motor dari assembly line hingga quality control. Siswa juga mendapat penjelasan tentang teknologi terkini yang diterapkan di pabrik.</p>',
-                'excerpt' => 'Siswa TSM kunjungi pabrik Astra Honda Motor Cikarang untuk pembelajaran industri.', 'user_id' => $uid, 'published_at' => date('Y-m-d H:i:s', strtotime('-10 days'))],
+                'excerpt' => 'Siswa TSM kunjungi pabrik Astra Honda Motor Cikarang untuk pembelajaran industri.', 'image' => 'post-4.png', 'user_id' => $uid, 'published_at' => date('Y-m-d H:i:s', strtotime('-10 days'))],
             ['title' => 'Penerimaan Raport Semester Ganjil TP 2024/2025', 'type' => 'pengumuman', 'status' => 'published', 'views' => 520, 'category_id' => 5,
                 'content' => '<p>Diberitahukan kepada seluruh orang tua/wali siswa bahwa <strong>Penerimaan Raport Semester Ganjil</strong> Tahun Pelajaran 2024/2025 akan dilaksanakan pada:</p><table><tr><td><strong>Hari/Tanggal</strong></td><td>: Jumat, 20 Desember 2024</td></tr><tr><td><strong>Waktu</strong></td><td>: 08.00 - 12.00 WIB</td></tr><tr><td><strong>Tempat</strong></td><td>: Ruang kelas masing-masing</td></tr></table><p>Orang tua/wali wajib hadir untuk mengambil raport. Tidak diwakilkan.</p>',
-                'excerpt' => 'Penerimaan raport semester ganjil dilaksanakan Jumat, 20 Desember 2024.', 'user_id' => $uid, 'published_at' => date('Y-m-d H:i:s', strtotime('-1 days'))],
+                'excerpt' => 'Penerimaan raport semester ganjil dilaksanakan Jumat, 20 Desember 2024.', 'image' => 'post-5.png', 'user_id' => $uid, 'published_at' => date('Y-m-d H:i:s', strtotime('-1 days'))],
             ['title' => 'Jadwal Ujian Akhir Semester (UAS) Ganjil 2024/2025', 'type' => 'pengumuman', 'status' => 'published', 'views' => 780, 'category_id' => 5,
                 'content' => '<p>Berikut jadwal <strong>Ujian Akhir Semester (UAS) Ganjil</strong> Tahun Pelajaran 2024/2025:</p><p><strong>Kelas XII:</strong> 2-7 Desember 2024<br><strong>Kelas XI:</strong> 9-14 Desember 2024<br><strong>Kelas X:</strong> 16-21 Desember 2024</p><p>Ujian dilaksanakan secara online menggunakan platform CBT sekolah. Pastikan akun sudah aktif sebelum ujian.</p>',
-                'excerpt' => 'UAS Ganjil 2024/2025 dimulai 2 Desember untuk kelas XII.', 'user_id' => $uid, 'published_at' => date('Y-m-d H:i:s', strtotime('-3 days'))],
+                'excerpt' => 'UAS Ganjil 2024/2025 dimulai 2 Desember untuk kelas XII.', 'image' => 'post-6.png', 'user_id' => $uid, 'published_at' => date('Y-m-d H:i:s', strtotime('-3 days'))],
             ['title' => 'Peringatan Hari Guru Nasional 2024', 'type' => 'agenda', 'status' => 'published', 'views' => 92,
                 'content' => '<p>Dalam rangka memperingati Hari Guru Nasional, akan diadakan upacara bendera dan berbagai perlombaan.</p>', 'user_id' => $uid, 'published_at' => date('Y-m-d H:i:s', strtotime('+10 days'))],
             ['title' => 'Job Fair SMK 2025: Bursa Kerja Khusus Lulusan SMK', 'type' => 'agenda', 'status' => 'published', 'views' => 340,
@@ -90,14 +90,14 @@ class DemoSeeder extends Seeder
 
         // ========== GURU ==========
         $guru = [
-            ['nip' => '196501011990031012', 'nama' => 'Drs. H. Ahmad Fauzi, M.Pd', 'jabatan' => 'Kepala Sekolah', 'bidang' => 'Manajemen Pendidikan', 'pendidikan' => 'S2 Manajemen Pendidikan', 'sort_order' => 1, 'is_active' => 1],
-            ['nip' => '197203152000121004', 'nama' => 'Dra. Siti Aminah, M.Pd', 'jabatan' => 'Wakasek Kurikulum', 'bidang' => 'Bahasa Indonesia', 'pendidikan' => 'S2 Pendidikan Bahasa', 'sort_order' => 2, 'is_active' => 1],
-            ['nip' => '198005202005011008', 'nama' => 'Rudi Hartono, S.Kom, M.T', 'jabatan' => 'Wakasek Sarana', 'bidang' => 'Rekayasa Perangkat Lunak', 'pendidikan' => 'S2 Teknik Informatika', 'sort_order' => 3, 'is_active' => 1],
-            ['nip' => '198511102010012015', 'nama' => 'Dewi Lestari, S.Pd, M.Pd', 'jabatan' => 'Wakasek Kesiswaan', 'bidang' => 'Matematika', 'pendidikan' => 'S2 Pendidikan Matematika', 'sort_order' => 4, 'is_active' => 1],
-            ['nip' => '199008152014021005', 'nama' => 'Bambang Sulistyo, S.T', 'jabatan' => 'Kaprodi TSM', 'bidang' => 'Teknik Sepeda Motor', 'pendidikan' => 'S1 Teknik Mesin', 'sort_order' => 5, 'is_active' => 1],
-            ['nip' => '199203202015032008', 'nama' => 'Nurul Hidayah, S.Pd', 'jabatan' => 'Guru Produktif', 'bidang' => 'Akuntansi', 'pendidikan' => 'S1 Pendidikan Akuntansi', 'sort_order' => 6, 'is_active' => 1],
-            ['nip' => '198807252011011010', 'nama' => 'Agus Wijaya, S.Kom', 'jabatan' => 'Kaprodi RPL', 'bidang' => 'Pemrograman Web', 'pendidikan' => 'S1 Teknik Informatika', 'sort_order' => 7, 'is_active' => 1],
-            ['nip' => '199501012019031015', 'nama' => 'Fitriani Putri, S.Pd', 'jabatan' => 'Guru BK', 'bidang' => 'Bimbingan Konseling', 'pendidikan' => 'S1 Bimbingan Konseling', 'sort_order' => 8, 'is_active' => 1],
+            ['nip' => '196501011990031012', 'nama' => 'Drs. H. Ahmad Fauzi, M.Pd', 'foto' => 'guru-1.png', 'jabatan' => 'Kepala Sekolah', 'bidang' => 'Manajemen Pendidikan', 'pendidikan' => 'S2 Manajemen Pendidikan', 'sort_order' => 1, 'is_active' => 1],
+            ['nip' => '197203152000121004', 'nama' => 'Dra. Siti Aminah, M.Pd', 'foto' => 'guru-2.png', 'jabatan' => 'Wakasek Kurikulum', 'bidang' => 'Bahasa Indonesia', 'pendidikan' => 'S2 Pendidikan Bahasa', 'sort_order' => 2, 'is_active' => 1],
+            ['nip' => '198005202005011008', 'nama' => 'Rudi Hartono, S.Kom, M.T', 'foto' => 'guru-3.png', 'jabatan' => 'Wakasek Sarana', 'bidang' => 'Rekayasa Perangkat Lunak', 'pendidikan' => 'S2 Teknik Informatika', 'sort_order' => 3, 'is_active' => 1],
+            ['nip' => '198511102010012015', 'nama' => 'Dewi Lestari, S.Pd, M.Pd', 'foto' => 'guru-4.png', 'jabatan' => 'Wakasek Kesiswaan', 'bidang' => 'Matematika', 'pendidikan' => 'S2 Pendidikan Matematika', 'sort_order' => 4, 'is_active' => 1],
+            ['nip' => '199008152014021005', 'nama' => 'Bambang Sulistyo, S.T', 'foto' => 'guru-5.png', 'jabatan' => 'Kaprodi TSM', 'bidang' => 'Teknik Sepeda Motor', 'pendidikan' => 'S1 Teknik Mesin', 'sort_order' => 5, 'is_active' => 1],
+            ['nip' => '199203202015032008', 'nama' => 'Nurul Hidayah, S.Pd', 'foto' => 'guru-6.png', 'jabatan' => 'Guru Produktif', 'bidang' => 'Akuntansi', 'pendidikan' => 'S1 Pendidikan Akuntansi', 'sort_order' => 6, 'is_active' => 1],
+            ['nip' => '198807252011011010', 'nama' => 'Agus Wijaya, S.Kom', 'foto' => 'guru-7.png', 'jabatan' => 'Kaprodi RPL', 'bidang' => 'Pemrograman Web', 'pendidikan' => 'S1 Teknik Informatika', 'sort_order' => 7, 'is_active' => 1],
+            ['nip' => '199501012019031015', 'nama' => 'Fitriani Putri, S.Pd', 'foto' => 'guru-8.png', 'jabatan' => 'Guru BK', 'bidang' => 'Bimbingan Konseling', 'pendidikan' => 'S1 Bimbingan Konseling', 'sort_order' => 8, 'is_active' => 1],
         ];
         foreach ($guru as &$g) { $g['created_at'] = $now; $g['updated_at'] = $now; }
         $this->db->table('guru')->insertBatch($guru);
@@ -116,32 +116,32 @@ class DemoSeeder extends Seeder
 
         // ========== JURUSAN ==========
         $jurusans = [
-            ['nama' => 'Rekayasa Perangkat Lunak', 'singkatan' => 'RPL', 'akreditasi' => 'A',
+            ['nama' => 'Rekayasa Perangkat Lunak', 'singkatan' => 'RPL', 'akreditasi' => 'A', 'gambar' => 'jurusan-1.png',
                 'deskripsi' => 'Kompetensi keahlian yang mempelajari pengembangan perangkat lunak, aplikasi web, mobile, dan desktop. Fokus pada pemrograman, database, UI/UX design, dan software engineering.',
                 'visi' => 'Menjadi program keahlian unggulan di bidang pengembangan perangkat lunak.',
                 'misi' => 'Menghasilkan lulusan yang kompeten dalam software development dan siap bersaing di industri IT.',
                 'kepala_jurusan' => 'Agus Wijaya, S.Kom', 'prospek_kerja' => 'Programmer, Web Developer, Mobile Developer, UI/UX Designer, Software Tester, IT Consultant'],
-            ['nama' => 'Teknik Sepeda Motor', 'singkatan' => 'TSM', 'akreditasi' => 'A',
+            ['nama' => 'Teknik Sepeda Motor', 'singkatan' => 'TSM', 'akreditasi' => 'A', 'gambar' => 'jurusan-2.png',
                 'deskripsi' => 'Kompetensi keahlian di bidang perawatan dan perbaikan sepeda motor. Mencakup teknologi mesin, kelistrikan, dan chassis sepeda motor.',
                 'visi' => 'Menjadi pusat unggulan pelatihan teknik sepeda motor.',
                 'misi' => 'Menyiapkan tenaga teknik yang profesional di bidang otomotif.',
                 'kepala_jurusan' => 'Bambang Sulistyo, S.T', 'prospek_kerja' => 'Mekanik, Service Advisor, Wirausaha Bengkel, Teknisi AHASS'],
-            ['nama' => 'Akuntansi dan Keuangan Lembaga', 'singkatan' => 'AKL', 'akreditasi' => 'A',
+            ['nama' => 'Akuntansi dan Keuangan Lembaga', 'singkatan' => 'AKL', 'akreditasi' => 'A', 'gambar' => 'jurusan-3.png',
                 'deskripsi' => 'Kompetensi keahlian yang mempelajari siklus akuntansi, perpajakan, audit, dan software akuntansi seperti MYOB dan Accurate.',
                 'visi' => 'Mencetak lulusan akuntansi yang profesional dan berintegritas.',
                 'misi' => 'Membekali siswa dengan kompetensi akuntansi sesuai standar industri.',
                 'kepala_jurusan' => 'Nurul Hidayah, S.Pd', 'prospek_kerja' => 'Staff Accounting, Auditor, Tax Officer, Finance Admin, Wirausaha'],
-            ['nama' => 'Teknik Komputer Jaringan', 'singkatan' => 'TKJ', 'akreditasi' => 'B',
+            ['nama' => 'Teknik Komputer Jaringan', 'singkatan' => 'TKJ', 'akreditasi' => 'B', 'gambar' => 'jurusan-4.png',
                 'deskripsi' => 'Kompetensi keahlian di bidang jaringan komputer, administrasi server, keamanan jaringan, dan Internet of Things.',
                 'visi' => 'Menjadi program keahlian unggulan di bidang jaringan komputer.',
                 'misi' => 'Menyiapkan lulusan yang ahli dalam infrastruktur dan keamanan jaringan.',
                 'kepala_jurusan' => 'Drs. Supriyanto', 'prospek_kerja' => 'Network Administrator, IT Support, Security Engineer, Cloud Engineer'],
-            ['nama' => 'Desain Komunikasi Visual', 'singkatan' => 'DKV', 'akreditasi' => 'A',
+            ['nama' => 'Desain Komunikasi Visual', 'singkatan' => 'DKV', 'akreditasi' => 'A', 'gambar' => 'jurusan-5.png',
                 'deskripsi' => 'Kompetensi keahlian yang mempelajari desain grafis, motion graphics, fotografi, videografi, dan branding.',
                 'visi' => 'Menjadi pusat kreativitas desain digital di tingkat SMK.',
                 'misi' => 'Mengembangkan bakat kreatif siswa dalam komunikasi visual.',
                 'kepala_jurusan' => 'Ratih Anggraini, S.Ds', 'prospek_kerja' => 'Graphic Designer, UI Designer, Content Creator, Animator, Fotografer'],
-            ['nama' => 'Manajemen Perkantoran', 'singkatan' => 'MP', 'akreditasi' => 'B',
+            ['nama' => 'Manajemen Perkantoran', 'singkatan' => 'MP', 'akreditasi' => 'B', 'gambar' => 'jurusan-6.png',
                 'deskripsi' => 'Kompetensi keahlian di bidang administrasi perkantoran, kearsipan, korespondensi, dan otomatisasi perkantoran.',
                 'visi' => 'Mencetak tenaga administrasi perkantoran yang profesional.',
                 'misi' => 'Membekali siswa dengan keterampilan manajemen kantor modern.',
@@ -188,12 +188,12 @@ class DemoSeeder extends Seeder
 
         // ========== PARTNER ==========
         $partners = [
-            ['nama' => 'PT Telkom Indonesia', 'website' => 'https://telkom.co.id', 'sort_order' => 1],
-            ['nama' => 'PT Astra International', 'website' => 'https://astra.co.id', 'sort_order' => 2],
-            ['nama' => 'Microsoft Indonesia', 'website' => 'https://microsoft.com', 'sort_order' => 3],
-            ['nama' => 'Google Indonesia', 'website' => 'https://google.com', 'sort_order' => 4],
-            ['nama' => 'PT Honda Prospect Motor', 'website' => 'https://honda-indonesia.com', 'sort_order' => 5],
-            ['nama' => 'Bank Mandiri', 'website' => 'https://bankmandiri.co.id', 'sort_order' => 6],
+            ['nama' => 'PT Telkom Indonesia', 'logo' => 'partner-1.png', 'website' => 'https://telkom.co.id', 'sort_order' => 1],
+            ['nama' => 'PT Astra International', 'logo' => 'partner-2.png', 'website' => 'https://astra.co.id', 'sort_order' => 2],
+            ['nama' => 'Microsoft Indonesia', 'logo' => 'partner-3.png', 'website' => 'https://microsoft.com', 'sort_order' => 3],
+            ['nama' => 'Google Indonesia', 'logo' => 'partner-4.png', 'website' => 'https://google.com', 'sort_order' => 4],
+            ['nama' => 'PT Honda Prospect Motor', 'logo' => 'partner-5.png', 'website' => 'https://honda-indonesia.com', 'sort_order' => 5],
+            ['nama' => 'Bank Mandiri', 'logo' => 'partner-6.png', 'website' => 'https://bankmandiri.co.id', 'sort_order' => 6],
         ];
         foreach ($partners as &$p) { $p['created_at'] = $now; $p['updated_at'] = $now; }
         $this->db->table('partners')->insertBatch($partners);
@@ -211,9 +211,9 @@ class DemoSeeder extends Seeder
 
         // ========== SLIDERS ==========
         $sliders = [
-            ['title' => 'Selamat Datang di SMKN 1 Indonesia', 'description' => 'Mencetak Generasi Unggul dan Kompeten', 'image' => null, 'url' => null, 'sort_order' => 1, 'is_active' => 1],
-            ['title' => 'PPDB 2024/2025 Telah Dibuka', 'description' => 'Daftarkan diri Anda sekarang!', 'image' => null, 'url' => '/ppdb', 'sort_order' => 2, 'is_active' => 1],
-            ['title' => 'Prestasi Membanggakan', 'description' => 'Juara LKS Tingkat Provinsi 2024', 'image' => null, 'url' => null, 'sort_order' => 3, 'is_active' => 1],
+            ['title' => 'Selamat Datang di SMKN 1 Indonesia', 'description' => 'Mencetak Generasi Unggul dan Kompeten', 'image' => 'slider-1.png', 'url' => null, 'sort_order' => 1, 'is_active' => 1],
+            ['title' => 'PPDB 2024/2025 Telah Dibuka', 'description' => 'Daftarkan diri Anda sekarang!', 'image' => 'slider-2.png', 'url' => '/ppdb', 'sort_order' => 2, 'is_active' => 1],
+            ['title' => 'Prestasi Membanggakan', 'description' => 'Juara LKS Tingkat Provinsi 2024', 'image' => 'slider-3.png', 'url' => null, 'sort_order' => 3, 'is_active' => 1],
         ];
         foreach ($sliders as &$s) { $s['created_at'] = $now; $s['updated_at'] = $now; }
         $this->db->table('sliders')->insertBatch($sliders);
@@ -226,6 +226,21 @@ class DemoSeeder extends Seeder
         ];
         foreach ($albums as &$a) { $a['created_at'] = $now; $a['updated_at'] = $now; }
         $this->db->table('albums')->insertBatch($albums);
+
+        // Gallery photos
+        $gallery = [];
+        for ($i = 1; $i <= 8; $i++) {
+            $gallery[] = [
+                'album_id'    => rand(1, 3),
+                'title'       => 'Foto Kegiatan ' . $i,
+                'description' => 'Dokumentasi kegiatan sekolah',
+                'image'       => 'gallery-' . $i . '.png',
+                'sort_order'  => $i,
+                'created_at'  => $now,
+                'updated_at'  => $now,
+            ];
+        }
+        $this->db->table('gallery')->insertBatch($gallery);
 
         // ========== VIDEOS ==========
         $videos = [

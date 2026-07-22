@@ -29,21 +29,6 @@
     </div>
 </section>
 
-<!-- SAMBUTAN -->
-<section data-aos="fade-up">
-    <div class="container">
-        <div class="section-header"><span class="section-label">Sambutan</span><h2 class="section-title">Kepala Sekolah</h2><p class="section-desc mx-auto">Assalamu'alaikum Warahmatullahi Wabarakatuh</p></div>
-        <div class="kepsek-card mx-auto" style="max-width:860px;">
-            <img src="<?= base_url('uploads/'.($setting->foto_kepsek??'default-kepsek.jpg')) ?>" class="kepsek-photo" alt="Kepala Sekolah" onerror="this.style.display='none'">
-            <div>
-                <span class="quote-mark">&ldquo;</span>
-                <p class="lead fst-italic text-muted mb-3"><?= nl2br(esc($setting->sambutan ?? '')) ?></p>
-                <strong class="text-dark"><?= esc($setting->kepsek ?? '') ?></strong><br><small class="text-muted">Kepala <?= esc($setting->nama_sekolah ?? 'Sekolah') ?></small>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- JURUSAN -->
 <?php if(!empty($jurusans)): ?>
 <section class="bg-white" data-aos="fade-up">
