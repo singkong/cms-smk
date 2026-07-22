@@ -28,7 +28,7 @@
             line-height: 1.7; overflow-x: hidden;
         }
         a { color: var(--c-primary); text-decoration: none; }
-        a:hover { color: var(--c-primary-dark); }
+        a:hover { color: var(--c-primary-dark); text-decoration: none !important; }
 
         /* ── NAVBAR ── */
         .navbar {
@@ -41,8 +41,9 @@
         .nav-link {
             color: rgba(255,255,255,0.75) !important; font-weight: 500; font-size: .875rem;
             padding: 8px 14px !important; border-radius: 8px; transition: all .2s; letter-spacing: -0.2px; margin: 0 1px;
+            text-decoration: none !important;
         }
-        .nav-link:hover, .nav-link.active { color: #fff !important; background: rgba(255,255,255,0.08); }
+        .nav-link:hover, .nav-link.active { color: #fff !important; background: rgba(255,255,255,0.08); text-decoration: none !important; }
         .btn-nav {
             background: linear-gradient(135deg, var(--c-primary), var(--c-accent)); border: none;
             color: #fff !important; font-weight: 600; padding: 9px 20px; border-radius: 50px;
@@ -160,7 +161,7 @@
         .footer { background: var(--c-darker); color: #94a3b8; padding: 50px 0 0; position: relative; font-size: .88rem; }
         .footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--c-primary), var(--c-accent), #06b6d4); }
         .footer h5 { color: #fff; font-weight: 700; margin-bottom: 16px; font-size: .92rem; letter-spacing: -0.2px; }
-        .footer a { color: #94a3b8; transition: color .2s; } .footer a:hover { color: #fff; }
+        .footer a { color: #94a3b8; transition: color .2s; text-decoration: none; } .footer a:hover { color: #fff; text-decoration: none; }
         .footer-social a { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 10px; background: rgba(255,255,255,0.05); color: #fff; margin-right: 7px; transition: all .25s; font-size: .95rem; }
         .footer-social a:hover { transform: translateY(-3px); } .footer-social a.fb:hover { background: #1877f2; } .footer-social a.ig:hover { background: #e4405f; } .footer-social a.yt:hover { background: #ff0000; }
         .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding: 16px 0; margin-top: 40px; text-align: center; font-size: .82rem; color: #64748b; }
