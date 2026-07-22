@@ -13,11 +13,31 @@
 
         <?php
             $uri = $current_uri;
-            $is = fn(...$p) => array_reduce($p, fn($c, $x) => $c || str_starts_with($uri, $x), false);
+            $on = fn(...$p) => array_reduce($p, fn($c, $x) => $c || $uri === $x || str_starts_with($uri, $x), false);
         ?>
 
         <div class="collapse navbar-collapse" id="sb-menu">
             <ul class="navbar-nav pt-2">
+
+                <?php
+                // Helper to render a sidebar menu group
+                $menuGroup = function($icon, $label, $items, $checkPaths) use ($on, $uri) {
+                    $isActive = $on(...$checkPaths);
+                ?>
+                <li class="nav-item">
+                    <a class="nav-link sb-parent <?= $isActive ? 'active' : '' ?>"
+                       href="javascript:void(0)" onclick="toggleSB(this)" data-target="sb-<?= $label ?>">
+                        <i class="ti ti-<?= $icon ?> icon me-2 fs-5"></i> <?= $label ?>
+                        <i class="ti ti-chevron-down icon ms-auto sb-chevron <?= $isActive ? 'rotate' : '' ?>"></i>
+                    </a>
+                    <div class="sb-sub <?= $isActive ? 'open' : '' ?>" id="sb-<?= $label ?>">
+                        <?php foreach ($items as $item): ?>
+                        <a class="nav-link sb-sub-link <?= $uri === $item['path'] || str_starts_with($uri, $item['path'].'/') ? 'active' : '' ?>"
+                           href="<?= $item['path'] ?>"><?= $item['label'] ?></a>
+                        <?php endforeach; ?>
+                    </div>
+                </li>
+                <?php }; ?>
 
                 <!-- Dashboard -->
                 <li class="nav-item">
@@ -27,104 +47,52 @@
                 </li>
 
                 <!-- Konten -->
-                <li class="nav-item">
-                    <a class="nav-link sb-toggle <?= $is('admin/posts','admin/categories','admin/tags','admin/comments') ? 'active' : '' ?>"
-                       href="javascript:void(0)" data-target="sb-konten">
-                        <i class="ti ti-article icon me-2 fs-5"></i> Konten
-                        <i class="ti ti-chevron-down icon ms-auto sb-chevron <?= $is('admin/posts','admin/categories','admin/tags','admin/comments') ? 'rotate' : '' ?>"></i>
-                    </a>
-                    <div class="sb-sub <?= $is('admin/posts','admin/categories','admin/tags','admin/comments') ? 'open' : '' ?>" id="sb-konten">
-                        <a class="nav-link sb-sub-link <?= $is('admin/posts') ? 'active' : '' ?>" href="/admin/posts">Postingan</a>
-                        <a class="nav-link sb-sub-link <?= $uri === 'admin/categories' ? 'active' : '' ?>" href="/admin/categories">Kategori</a>
-                        <a class="nav-link sb-sub-link <?= $is('admin/tags') ? 'active' : '' ?>" href="/admin/tags">Tag</a>
-                        <a class="nav-link sb-sub-link <?= $is('admin/comments') ? 'active' : '' ?>" href="/admin/comments">Komentar</a>
-                    </div>
-                </li>
+                <?php $menuGroup('article', 'Konten', [
+                    ['label'=>'Postingan','path'=>'/admin/posts'],
+                    ['label'=>'Kategori','path'=>'/admin/categories'],
+                    ['label'=>'Tag','path'=>'/admin/tags'],
+                    ['label'=>'Komentar','path'=>'/admin/comments'],
+                ], ['admin/posts','admin/categories','admin/tags','admin/comments']); ?>
 
                 <!-- Media -->
-                <li class="nav-item">
-                    <a class="nav-link sb-toggle <?= $is('admin/gallery','admin/videos','admin/albums') ? 'active' : '' ?>"
-                       href="javascript:void(0)" data-target="sb-media">
-                        <i class="ti ti-photo icon me-2 fs-5"></i> Media
-                        <i class="ti ti-chevron-down icon ms-auto sb-chevron <?= $is('admin/gallery','admin/videos','admin/albums') ? 'rotate' : '' ?>"></i>
-                    </a>
-                    <div class="sb-sub <?= $is('admin/gallery','admin/videos','admin/albums') ? 'open' : '' ?>" id="sb-media">
-                        <a class="nav-link sb-sub-link <?= $is('admin/gallery') ? 'active' : '' ?>" href="/admin/gallery">Galeri Foto</a>
-                        <a class="nav-link sb-sub-link <?= $is('admin/albums') ? 'active' : '' ?>" href="/admin/albums">Album</a>
-                        <a class="nav-link sb-sub-link <?= $is('admin/videos') ? 'active' : '' ?>" href="/admin/videos">Video</a>
-                    </div>
-                </li>
+                <?php $menuGroup('photo', 'Media', [
+                    ['label'=>'Galeri Foto','path'=>'/admin/gallery'],
+                    ['label'=>'Album','path'=>'/admin/albums'],
+                    ['label'=>'Video','path'=>'/admin/videos'],
+                ], ['admin/gallery','admin/albums','admin/videos']); ?>
 
                 <!-- Master Data -->
-                <li class="nav-item">
-                    <a class="nav-link sb-toggle <?= $is('admin/guru','admin/staff','admin/jurusan','admin/fasilitas','admin/alumni','admin/sliders','admin/partners','admin/testimoni','admin/faq') ? 'active' : '' ?>"
-                       href="javascript:void(0)" data-target="sb-master">
-                        <i class="ti ti-database icon me-2 fs-5"></i> Master Data
-                        <i class="ti ti-chevron-down icon ms-auto sb-chevron <?= $is('admin/guru','admin/staff','admin/jurusan','admin/fasilitas','admin/alumni','admin/sliders','admin/partners','admin/testimoni','admin/faq') ? 'rotate' : '' ?>"></i>
-                    </a>
-                    <div class="sb-sub <?= $is('admin/guru','admin/staff','admin/jurusan','admin/fasilitas','admin/alumni','admin/sliders','admin/partners','admin/testimoni','admin/faq') ? 'open' : '' ?>" id="sb-master">
-                        <a class="nav-link sb-sub-link <?= $is('admin/guru') ? 'active' : '' ?>" href="/admin/guru">Guru</a>
-                        <a class="nav-link sb-sub-link <?= $is('admin/staff') ? 'active' : '' ?>" href="/admin/staff">Staff</a>
-                        <a class="nav-link sb-sub-link <?= $is('admin/jurusan') ? 'active' : '' ?>" href="/admin/jurusan">Jurusan</a>
-                        <a class="nav-link sb-sub-link <?= $is('admin/fasilitas') ? 'active' : '' ?>" href="/admin/fasilitas">Fasilitas</a>
-                        <a class="nav-link sb-sub-link <?= $is('admin/alumni') ? 'active' : '' ?>" href="/admin/alumni">Alumni</a>
-                        <a class="nav-link sb-sub-link <?= $is('admin/sliders') ? 'active' : '' ?>" href="/admin/sliders">Slider</a>
-                        <a class="nav-link sb-sub-link <?= $is('admin/partners') ? 'active' : '' ?>" href="/admin/partners">Partner</a>
-                        <a class="nav-link sb-sub-link <?= $is('admin/testimoni') ? 'active' : '' ?>" href="/admin/testimoni">Testimoni</a>
-                        <a class="nav-link sb-sub-link <?= $is('admin/faq') ? 'active' : '' ?>" href="/admin/faq">FAQ</a>
-                    </div>
-                </li>
+                <?php $menuGroup('database', 'Master Data', [
+                    ['label'=>'Guru','path'=>'/admin/guru'],
+                    ['label'=>'Staff','path'=>'/admin/staff'],
+                    ['label'=>'Jurusan','path'=>'/admin/jurusan'],
+                    ['label'=>'Fasilitas','path'=>'/admin/fasilitas'],
+                    ['label'=>'Alumni','path'=>'/admin/alumni'],
+                    ['label'=>'Slider','path'=>'/admin/sliders'],
+                    ['label'=>'Partner','path'=>'/admin/partners'],
+                    ['label'=>'Testimoni','path'=>'/admin/testimoni'],
+                    ['label'=>'FAQ','path'=>'/admin/faq'],
+                ], ['admin/guru','admin/staff','admin/jurusan','admin/fasilitas','admin/alumni','admin/sliders','admin/partners','admin/testimoni','admin/faq']); ?>
 
                 <!-- Single items -->
-                <li class="nav-item">
-                    <a class="nav-link <?= $is('admin/downloads') ? 'active' : '' ?>" href="/admin/downloads">
-                        <i class="ti ti-download icon me-2 fs-5"></i> Download
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?= $is('admin/menus') ? 'active' : '' ?>" href="/admin/menus">
-                        <i class="ti ti-menu-2 icon me-2 fs-5"></i> Menu
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?= $is('admin/ppdb') ? 'active' : '' ?>" href="/admin/ppdb">
-                        <i class="ti ti-school icon me-2 fs-5"></i> PPDB
-                    </a>
-                </li>
+                <li class="nav-item"><a class="nav-link <?= $on('admin/downloads') ? 'active' : '' ?>" href="/admin/downloads"><i class="ti ti-download icon me-2 fs-5"></i> Download</a></li>
+                <li class="nav-item"><a class="nav-link <?= $on('admin/menus') ? 'active' : '' ?>" href="/admin/menus"><i class="ti ti-menu-2 icon me-2 fs-5"></i> Menu</a></li>
+                <li class="nav-item"><a class="nav-link <?= $on('admin/ppdb') ? 'active' : '' ?>" href="/admin/ppdb"><i class="ti ti-school icon me-2 fs-5"></i> PPDB</a></li>
 
                 <!-- Manajemen -->
-                <li class="nav-item">
-                    <a class="nav-link sb-toggle <?= $is('admin/users','admin/roles','admin/contacts','admin/visitors','admin/logs') ? 'active' : '' ?>"
-                       href="javascript:void(0)" data-target="sb-mgmt">
-                        <i class="ti ti-settings icon me-2 fs-5"></i> Manajemen
-                        <i class="ti ti-chevron-down icon ms-auto sb-chevron <?= $is('admin/users','admin/roles','admin/contacts','admin/visitors','admin/logs') ? 'rotate' : '' ?>"></i>
-                    </a>
-                    <div class="sb-sub <?= $is('admin/users','admin/roles','admin/contacts','admin/visitors','admin/logs') ? 'open' : '' ?>" id="sb-mgmt">
-                        <a class="nav-link sb-sub-link <?= $is('admin/users') ? 'active' : '' ?>" href="/admin/users">Pengguna</a>
-                        <a class="nav-link sb-sub-link <?= $is('admin/roles') ? 'active' : '' ?>" href="/admin/roles">Role & Permission</a>
-                        <a class="nav-link sb-sub-link <?= $is('admin/contacts') ? 'active' : '' ?>" href="/admin/contacts">Pesan Masuk</a>
-                        <a class="nav-link sb-sub-link <?= $is('admin/visitors') ? 'active' : '' ?>" href="/admin/visitors">Pengunjung</a>
-                        <a class="nav-link sb-sub-link <?= $is('admin/logs') ? 'active' : '' ?>" href="/admin/logs">Log Aktivitas</a>
-                    </div>
-                </li>
+                <?php $menuGroup('settings', 'Manajemen', [
+                    ['label'=>'Pengguna','path'=>'/admin/users'],
+                    ['label'=>'Role & Permission','path'=>'/admin/roles'],
+                    ['label'=>'Pesan Masuk','path'=>'/admin/contacts'],
+                    ['label'=>'Pengunjung','path'=>'/admin/visitors'],
+                    ['label'=>'Log Aktivitas','path'=>'/admin/logs'],
+                ], ['admin/users','admin/roles','admin/contacts','admin/visitors','admin/logs']); ?>
 
-                <!-- Pengaturan -->
-                <li class="nav-item">
-                    <a class="nav-link <?= $uri === 'admin/settings' ? 'active' : '' ?>" href="/admin/settings">
-                        <i class="ti ti-adjustments icon me-2 fs-5"></i> Pengaturan
-                    </a>
-                </li>
+                <!-- Settings -->
+                <li class="nav-item"><a class="nav-link <?= $uri === 'admin/settings' ? 'active' : '' ?>" href="/admin/settings"><i class="ti ti-adjustments icon me-2 fs-5"></i> Pengaturan</a></li>
 
-                <li class="nav-item mt-3">
-                    <a class="nav-link" href="/" target="_blank">
-                        <i class="ti ti-eye icon me-2 fs-5"></i> Lihat Website
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-danger" href="/logout">
-                        <i class="ti ti-logout icon me-2 fs-5"></i> Logout
-                    </a>
-                </li>
+                <li class="nav-item mt-3"><a class="nav-link" href="/" target="_blank"><i class="ti ti-eye icon me-2 fs-5"></i> Lihat Website</a></li>
+                <li class="nav-item"><a class="nav-link text-danger" href="/logout"><i class="ti ti-logout icon me-2 fs-5"></i> Logout</a></li>
 
             </ul>
         </div>
@@ -143,19 +111,16 @@
 </style>
 
 <script>
-    document.querySelectorAll('.sb-toggle').forEach(function(el) {
-        el.addEventListener('click', function(e) {
-            e.preventDefault();
-            var target = document.getElementById(this.dataset.target);
-            if (!target) return;
-            var chevron = this.querySelector('.sb-chevron');
-            if (target.classList.contains('open')) {
-                target.classList.remove('open');
-                if (chevron) chevron.classList.remove('rotate');
-            } else {
-                target.classList.add('open');
-                if (chevron) chevron.classList.add('rotate');
-            }
-        });
-    });
+function toggleSB(el) {
+    var target = document.getElementById(el.dataset.target);
+    if (!target) return;
+    var chevron = el.querySelector('.sb-chevron');
+    if (target.classList.contains('open')) {
+        target.classList.remove('open');
+        if (chevron) chevron.classList.remove('rotate');
+    } else {
+        target.classList.add('open');
+        if (chevron) chevron.classList.add('rotate');
+    }
+}
 </script>
