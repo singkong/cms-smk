@@ -17,7 +17,11 @@ class DownloadController extends GuruController
     {
         $data = $this->data;
         $data['title'] = 'Download';
-        $data['items'] = $this->model->orderBy($this->orderBy)->findAll();
+        $data['items'] = $this->db->table('downloads')
+            ->select('downloads.*, download_categories.name AS category_name')
+            ->join('download_categories', 'download_categories.id = downloads.category_id', 'left')
+            ->orderBy('downloads.id', 'DESC')
+            ->get()->getResult();
         $data['categories'] = $this->db->table('download_categories')->orderBy('name', 'ASC')->get()->getResult();
         return view($this->viewIndex, $data);
     }
