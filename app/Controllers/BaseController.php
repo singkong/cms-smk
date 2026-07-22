@@ -7,7 +7,7 @@ use App\Models\SettingModel;
 
 class BaseController extends Controller
 {
-    protected $helpers = ['frontend'];
+    protected $helpers = ['frontend', 'text'];
     protected $setting;
     protected $db;
     protected $pager;
