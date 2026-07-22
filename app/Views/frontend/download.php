@@ -32,7 +32,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $no = 1 + (($pager ? $pager->getCurrentPage() : 1) - 1) * 15; ?>
+                            <?php $no = 1; ?>
                             <?php foreach ($downloads as $d): ?>
                             <tr>
                                 <td><?= $no++ ?></td>
