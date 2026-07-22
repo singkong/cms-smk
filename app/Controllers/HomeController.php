@@ -275,13 +275,13 @@ class HomeController extends BaseController
         $data['title'] = 'Download';
         $perPage = 15;
         $builder = $this->db->table('downloads')
-            ->select('downloads.*, categories.name AS category_name')
-            ->join('categories', 'categories.id = downloads.category_id', 'left')
+            ->select('downloads.*, download_categories.name AS category_name')
+            ->join('download_categories', 'download_categories.id = downloads.category_id', 'left')
             ->orderBy('downloads.id', 'DESC');
         $result = $this->paginateBuilder($builder, $perPage);
         $data['downloads'] = $result->data;
         $data['pager'] = $result->pager;
-        $data['categories'] = $this->db->table('categories')->where('type', 'download')->get()->getResult();
+        $data['categories'] = $this->db->table('download_categories')->orderBy('name', 'ASC')->get()->getResult();
         return view('frontend/download', $data);
     }
 
