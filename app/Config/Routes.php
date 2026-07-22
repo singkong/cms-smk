@@ -107,6 +107,9 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
 
     // Menu
     $routes->get('menus', 'MenuController::index');
+    $routes->post('menus/store', 'MenuController::store');
+    $routes->post('menus/update/(:num)', 'MenuController::update/$1');
+    $routes->get('menus/delete/(:num)', 'MenuController::delete/$1');
     $routes->get('menus/items/(:num)', 'MenuController::items/$1');
     $routes->post('menus/items/store/(:num)', 'MenuController::storeItem/$1');
     $routes->post('menus/items/update/(:num)', 'MenuController::updateItem/$1');
