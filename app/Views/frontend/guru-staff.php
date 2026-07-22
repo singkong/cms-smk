@@ -42,7 +42,7 @@
                                     <div class="card card-sm h-100">
                                         <div class="card-body text-center">
                                             <?php if (!empty($g->foto)): ?>
-                                                <img src="<?= esc($g->foto) ?>" alt="<?= esc($g->nama) ?>" class="rounded-circle mb-3" style="width:100px;height:100px;object-fit:cover;">
+                                                <img src="<?= base_url('uploads/guru/'.$g->foto) ?>" alt="<?= esc($g->nama) ?>" class="rounded-circle mb-3" style="width:100px;height:100px;object-fit:cover;">
                                             <?php else: ?>
                                                 <span class="avatar avatar-lg bg-blue-lt rounded-circle mb-3 mx-auto">
                                                     <i class="ti ti-user icon" style="font-size:2rem;"></i>
@@ -99,7 +99,7 @@
                                     <div class="card card-sm h-100">
                                         <div class="card-body text-center">
                                             <?php if (!empty($s->foto)): ?>
-                                                <img src="<?= esc($s->foto) ?>" alt="<?= esc($s->nama) ?>" class="rounded-circle mb-3" style="width:100px;height:100px;object-fit:cover;">
+                                                <img src="<?= base_url('uploads/staff/'.$s->foto) ?>" alt="<?= esc($s->nama) ?>" class="rounded-circle mb-3" style="width:100px;height:100px;object-fit:cover;">
                                             <?php else: ?>
                                                 <span class="avatar avatar-lg bg-azure-lt rounded-circle mb-3 mx-auto">
                                                     <i class="ti ti-user icon" style="font-size:2rem;"></i>

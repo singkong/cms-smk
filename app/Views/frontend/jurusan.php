@@ -41,7 +41,7 @@
                                 <span class="badge bg-success mb-2">Akreditasi <?= esc($j->akreditasi) ?></span>
                             <?php endif; ?>
                             <p class="text-muted mb-3" style="line-height:1.7;">
-                                <?= esc(character_limiter(strip_tags($j->deskripsi ?? ''), 120)) ?>
+                                <?= esc(strip_tags($j->deskripsi ?? '')) ?>
                             </p>
                             <?php if (!empty($j->kepala_jurusan)): ?>
                                 <p class="text-muted small mb-3">

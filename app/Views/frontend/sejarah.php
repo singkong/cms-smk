@@ -18,7 +18,7 @@
                     <div class="card">
                         <div class="card-body p-5">
                             <div style="font-size:1.05rem;line-height:1.9;white-space:pre-line;">
-                                <?= esc($sejarah) ?>
+                                <?= $sejarah ?? '' ?>
                             </div>
                         </div>
                     </div>

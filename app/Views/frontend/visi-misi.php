@@ -22,7 +22,7 @@
                         </span>
                         <h3 class="fw-bold mb-3">Visi</h3>
                         <div class="bg-light rounded-3 p-4 text-start">
-                            <p style="white-space:pre-line;font-size:1.05rem;line-height:1.8;"><?= esc($setting->visi ?? 'Belum ada visi.') ?></p>
+                            <p style="white-space:pre-line;font-size:1.05rem;line-height:1.8;"><?= $setting->visi ?? 'Belum ada visi.' ?></p>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                         </span>
                         <h3 class="fw-bold mb-3">Misi</h3>
                         <div class="bg-light rounded-3 p-4 text-start">
-                            <p style="white-space:pre-line;font-size:1.05rem;line-height:1.8;"><?= esc($setting->misi ?? 'Belum ada misi.') ?></p>
+                            <p style="white-space:pre-line;font-size:1.05rem;line-height:1.8;"><?= $setting->misi ?? 'Belum ada misi.' ?></p>
                         </div>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                         </span>
                         <h3 class="fw-bold mb-3">Tujuan</h3>
                         <div class="bg-light rounded-3 p-4 text-start">
-                            <p style="white-space:pre-line;font-size:1.05rem;line-height:1.8;"><?= esc($setting->tujuan) ?></p>
+                            <p style="white-space:pre-line;font-size:1.05rem;line-height:1.8;"><?= $setting->tujuan ?? '' ?></p>
                         </div>
                     </div>
                 </div>

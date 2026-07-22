@@ -18,7 +18,7 @@
                     <?php endforeach; ?>
                 </div>
             </div>
-            <div class="col-lg-4"><div class="card-elevate p-4 text-center"><img src="<?= base_url('uploads/'.($setting->foto_kepsek??'default-kepsek.jpg')) ?>" class="kepsek-photo mb-3 mx-auto" style="display:block;" alt="Kepsek"><h5 class="fw-bold"><?= esc($setting->kepsek??'') ?></h5><p class="text-muted small mb-0">Kepala Sekolah<br>NIP. <?= esc($setting->nip_kepsek??'-') ?></p><hr><p class="small text-muted fst-italic mb-0">&ldquo;<?= esc($setting->sambutan??'') ?>&rdquo;</p></div></div>
+            <div class="col-lg-4"><div class="card-elevate p-4 text-center"><img src="<?= base_url('uploads/'.($setting->foto_kepsek??'default-kepsek.jpg')) ?>" class="kepsek-photo mb-3 mx-auto" style="display:block;" alt="Kepsek"><h5 class="fw-bold"><?= esc($setting->kepsek??'') ?></h5><p class="text-muted small mb-0">Kepala Sekolah<br>NIP. <?= esc($setting->nip_kepsek??'-') ?></p><hr><p class="small text-muted fst-italic mb-0">&ldquo;<?= $setting->sambutan ?? '' ?>&rdquo;</p></div></div>
         </div>
     </div>
 </section>

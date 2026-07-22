@@ -24,7 +24,7 @@
                     <div class="card card-sm h-100 shadow-sm border-0">
                         <div class="card-body text-center">
                             <?php if (!empty($a->foto)): ?>
-                                <img src="<?= esc($a->foto) ?>" alt="<?= esc($a->nama) ?>" class="rounded-circle mb-3" style="width:80px;height:80px;object-fit:cover;">
+                                <img src="<?= base_url('uploads/alumni/'.$a->foto) ?>" alt="<?= esc($a->nama) ?>" class="rounded-circle mb-3" style="width:80px;height:80px;object-fit:cover;">
                             <?php else: ?>
                                 <span class="avatar avatar-lg bg-purple-lt rounded-circle mb-3 mx-auto">
                                     <i class="ti ti-user icon" style="font-size:2rem;"></i>
