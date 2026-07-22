@@ -186,5 +186,6 @@ $routes->get('/kontak', 'HomeController::kontak');
 $routes->post('/kontak/send', 'HomeController::sendContact');
 $routes->get('/faq', 'HomeController::faq');
 $routes->get('/ppdb', 'HomeController::ppdb');
+$routes->post('/ppdb/register', 'HomeController::ppdbRegister');
 $routes->get('/sitemap', 'HomeController::sitemap');
 $routes->get('/search', 'HomeController::search');

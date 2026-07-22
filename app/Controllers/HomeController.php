@@ -349,7 +349,66 @@ class HomeController extends BaseController
         $data = $this->data;
         $data['title'] = 'PPDB';
         $data['ppdb'] = $this->db->table('ppdb_settings')->get()->getRow();
+        $data['jurusans'] = $this->db->table('jurusans')->orderBy('nama', 'ASC')->get()->getResult();
+
+        if ($data['ppdb']) {
+            $settingId = $data['ppdb']->id;
+            $data['total_pendaftar'] = $this->db->table('ppdb_registrations')
+                ->where('ppdb_setting_id', $settingId)->countAllResults();
+        }
+
         return view('frontend/ppdb', $data);
+    }
+
+    public function ppdbRegister()
+    {
+        $ppdb = $this->db->table('ppdb_settings')->orderBy('id', 'DESC')->get()->getRow();
+
+        if (!$ppdb || !$ppdb->is_open) {
+            return redirect()->to('/ppdb')->with('error', 'Pendaftaran PPDB belum dibuka.');
+        }
+
+        if ($ppdb->tanggal_tutup && date('Y-m-d') > $ppdb->tanggal_tutup) {
+            return redirect()->to('/ppdb')->with('error', 'Pendaftaran PPDB sudah ditutup.');
+        }
+
+        $rules = [
+            'nama'           => 'required|min_length[3]',
+            'nik'            => 'permit_empty|min_length[16]|max_length[20]',
+            'tempat_lahir'   => 'permit_empty',
+            'tanggal_lahir'  => 'permit_empty',
+            'alamat'         => 'required',
+            'telepon'        => 'required',
+            'asal_sekolah'   => 'required',
+            'jurusan_id'     => 'required|integer',
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
+        $noReg = 'PPDB-' . date('Ymd') . '-' . strtoupper(bin2hex(random_bytes(3)));
+
+        $this->db->table('ppdb_registrations')->insert([
+            'ppdb_setting_id' => $ppdb->id,
+            'no_registrasi'   => $noReg,
+            'nama'            => $this->request->getPost('nama'),
+            'nik'             => $this->request->getPost('nik'),
+            'tempat_lahir'    => $this->request->getPost('tempat_lahir'),
+            'tanggal_lahir'   => $this->request->getPost('tanggal_lahir'),
+            'jk'              => $this->request->getPost('jk'),
+            'alamat'          => $this->request->getPost('alamat'),
+            'telepon'         => $this->request->getPost('telepon'),
+            'email'           => $this->request->getPost('email'),
+            'asal_sekolah'    => $this->request->getPost('asal_sekolah'),
+            'jurusan_id'      => $this->request->getPost('jurusan_id'),
+            'status'          => 'pending',
+            'created_at'      => date('Y-m-d H:i:s'),
+            'updated_at'      => date('Y-m-d H:i:s'),
+        ]);
+
+        return redirect()->to('/ppdb?registered=1&no=' . $noReg)->with('success',
+            'Pendaftaran berhasil! Nomor registrasi Anda: <strong>' . $noReg . '</strong>. Harap simpan nomor ini untuk keperluan selanjutnya.');
     }
 
     public function sitemap()
