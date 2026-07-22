@@ -1,30 +1,31 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
 
-<!-- ===== HERO SLIDER ===== -->
+<!-- ===== HERO ===== -->
 <section class="home-hero" id="heroParticles">
     <?php for($i=0;$i<35;$i++): ?><span class="hero-dot" style="left:<?= rand(0,100) ?>%;top:<?= rand(0,100) ?>%;animation-delay:<?= rand(0,70)/10 ?>s;animation-duration:<?= 5+rand(0,40)/10 ?>s;"></span><?php endfor; ?>
     <?php if (!empty($sliders)): ?>
     <div class="swiper heroSwiper"><div class="swiper-wrapper">
         <?php foreach ($sliders as $s): ?>
         <div class="swiper-slide" <?= $s->image ? 'style="background:linear-gradient(135deg,rgba(2,6,23,0.75),rgba(15,23,42,0.8)),url(\''.base_url('uploads/sliders/'.$s->image).'\') center/cover no-repeat"' : '' ?>>
-        <div class="hero-content container text-center">
-            <div class="hero-badge"><i class="ti ti-star-filled icon me-1 text-warning"></i> Akreditasi <?= esc($setting->akreditasi ?? 'A') ?></div>
-            <h1 class="hero-title"><?= esc($s->title) ?></h1>
-            <?php if ($s->description): ?><p class="hero-desc text-balance"><?= esc($s->description) ?></p><?php endif; ?>
-            <div class="hero-btns">
-                <a href="/profil" class="btn-hero btn-hero-primary"><i class="ti ti-info-circle icon"></i> Profil Sekolah</a>
-                <?php if ($s->url): ?><a href="<?= esc($s->url) ?>" class="btn-hero btn-hero-outline"><i class="ti ti-arrow-right icon"></i> Selengkapnya</a><?php endif; ?>
-                <a href="/ppdb#daftar" class="btn-hero btn-hero-outline"><i class="ti ti-school icon"></i> Daftar PPDB</a>
+            <div class="hero-content container text-center">
+                <div class="hero-badge"><i class="ti ti-star-filled icon me-1 text-warning"></i> Akreditasi <?= esc($setting->akreditasi ?? 'A') ?></div>
+                <h1 class="hero-title"><?= esc($s->title) ?></h1>
+                <?php if ($s->description): ?><p class="hero-desc"><?= esc($s->description) ?></p><?php endif; ?>
+                <div class="hero-btns">
+                    <a href="/profil" class="btn-hero btn-hero-primary"><i class="ti ti-info-circle icon"></i> Profil Sekolah</a>
+                    <?php if ($s->url): ?><a href="<?= esc($s->url) ?>" class="btn-hero btn-hero-outline"><i class="ti ti-arrow-right icon"></i> Selengkapnya</a><?php endif; ?>
+                    <a href="/ppdb#daftar" class="btn-hero btn-hero-outline"><i class="ti ti-school icon"></i> Daftar PPDB</a>
+                </div>
             </div>
-        </div></div>
+        </div>
         <?php endforeach; ?>
     </div><div class="swiper-pagination"></div><div class="swiper-button-prev"></div><div class="swiper-button-next"></div></div>
     <?php else: ?>
     <div class="hero-content container text-center">
         <div class="hero-badge"><i class="ti ti-star-filled icon me-1 text-warning"></i> Akreditasi <?= esc($setting->akreditasi ?? 'A') ?></div>
         <h1 class="hero-title">Selamat Datang di<br><span><?= esc($setting->nama_sekolah) ?></span></h1>
-        <p class="hero-desc text-balance"><?= esc($setting->deskripsi ?? 'Mencetak generasi unggul, kompeten, dan berdaya saing global.') ?></p>
+        <p class="hero-desc"><?= esc($setting->deskripsi ?? 'Mencetak generasi unggul, kompeten, dan berdaya saing global.') ?></p>
         <div class="hero-btns">
             <a href="/profil" class="btn-hero btn-hero-primary"><i class="ti ti-info-circle icon"></i> Profil Sekolah</a>
             <a href="/ppdb#daftar" class="btn-hero btn-hero-outline"><i class="ti ti-school icon"></i> Daftar PPDB</a>
@@ -38,15 +39,13 @@
 <!-- ===== STATS ===== -->
 <section data-aos="fade-up">
     <div class="container">
-        <div class="row g-3" id="statRow">
-            <?php
-            $stats = [
+        <div class="row g-4" id="statRow">
+            <?php foreach ([
                 ['icon'=>'users','color'=>'primary','number'=>'500','label'=>'Siswa Aktif'],
                 ['icon'=>'user-star','color'=>'success','number'=>'50','label'=>'Guru Profesional'],
                 ['icon'=>'building','color'=>'warning','number'=>count($jurusans??[]),'label'=>'Kompetensi Keahlian','counter'=>false],
                 ['icon'=>'trophy','color'=>'red','number'=>'120','label'=>'Prestasi'],
-            ];
-            foreach($stats as $st): ?>
+            ] as $st): ?>
             <div class="col-6 col-md-3"><div class="stat-card">
                 <div class="stat-icon text-<?= $st['color'] ?>"><i class="ti ti-<?= $st['icon'] ?> icon"></i></div>
                 <div class="stat-number"><?= ($st['counter'] ?? true) ? '<span class="counter" data-target="'.$st['number'].'">0</span>+' : $st['number'] ?></div>
@@ -59,7 +58,7 @@
 
 <!-- ===== JURUSAN ===== -->
 <?php if(!empty($jurusans)): ?>
-<section data-aos="fade-up">
+<section class="bg-white" data-aos="fade-up">
     <div class="container">
         <div class="section-header"><span class="section-label">Program Keahlian</span><h2 class="section-title">Kompetensi Keahlian</h2><p class="section-desc mx-auto">Pilihan program keahlian unggulan sesuai kebutuhan industri</p></div>
         <div class="row g-4">
@@ -83,30 +82,40 @@
 </section>
 <?php endif; ?>
 
-<!-- ===== BERITA + PENGUMUMAN ===== -->
-<section class="bg-soft">
+<!-- ===== BERITA ===== -->
+<section class="bg-soft" data-aos="fade-up">
     <div class="container">
-        <div class="row g-5">
-            <div class="col-lg-8" data-aos="fade-right">
-                <div class="d-flex justify-content-between align-items-end mb-4"><div><span class="section-label">Informasi</span><h2 class="section-title mb-0">Berita Terbaru</h2></div><a href="/berita" class="fw-semibold small">Lihat Semua <i class="ti ti-arrow-right icon ms-1"></i></a></div>
-                <div class="row g-4">
-                    <?php foreach($berita as $i=>$post): ?>
-                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="<?=$i*80?>">
-                        <div class="card-elevate h-100">
-                            <?php if($post->image): ?><div class="card-img-wrap"><img src="<?= base_url('uploads/posts/'.$post->image) ?>" alt="<?= esc($post->title) ?>"></div><?php endif; ?>
-                            <div class="card-body p-4 d-flex flex-column">
-                                <div class="small text-muted mb-2"><i class="ti ti-calendar icon me-1"></i><?= date('d M Y',strtotime($post->created_at)) ?> &bull; <?= esc($post->author) ?></div>
-                                <h5 class="fw-bold mb-2 lh-sm"><?= esc($post->title) ?></h5>
-                                <p class="text-muted small flex-grow-1"><?= character_limiter(strip_tags($post->content??''), 90) ?></p>
-                                <a href="/berita/<?= esc($post->slug) ?>" class="btn btn-outline-primary rounded-pill btn-sm mt-2 align-self-start">Baca <i class="ti ti-arrow-right icon ms-1"></i></a>
-                            </div>
-                        </div>
+        <div class="d-flex justify-content-between align-items-end mb-4">
+            <div><span class="section-label">Informasi</span><h2 class="section-title mb-0">Berita Terbaru</h2></div>
+            <a href="/berita" class="fw-semibold small">Lihat Semua <i class="ti ti-arrow-right icon ms-1"></i></a>
+        </div>
+        <div class="row g-4">
+            <?php foreach($berita as $i=>$post): ?>
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="<?=$i*80?>">
+                <div class="card-elevate h-100">
+                    <?php if($post->image): ?><div class="card-img-wrap"><img src="<?= base_url('uploads/posts/'.$post->image) ?>" alt="<?= esc($post->title) ?>" loading="lazy"></div><?php endif; ?>
+                    <div class="card-body p-4 d-flex flex-column">
+                        <div class="small text-muted mb-2"><i class="ti ti-calendar icon me-1"></i><?= date('d M Y',strtotime($post->created_at)) ?></div>
+                        <h5 class="fw-bold mb-2 lh-sm"><?= esc($post->title) ?></h5>
+                        <p class="text-muted small flex-grow-1"><?= character_limiter(strip_tags($post->content??''), 80) ?></p>
+                        <a href="/berita/<?= esc($post->slug) ?>" class="btn btn-outline-primary rounded-pill btn-sm mt-2 align-self-start">Baca <i class="ti ti-arrow-right icon ms-1"></i></a>
                     </div>
-                    <?php endforeach; ?>
                 </div>
             </div>
-            <div class="col-lg-4" data-aos="fade-left">
-                <div class="d-flex justify-content-between align-items-end mb-4"><div><span class="section-label">Pengumuman</span><h2 class="section-title mb-0" style="font-size:1.4rem;">Terbaru</h2></div><a href="/pengumuman" class="fw-semibold small text-warning">Semua <i class="ti ti-arrow-right icon ms-1"></i></a></div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PENGUMUMAN + QUICK LINKS ===== -->
+<section class="bg-white" data-aos="fade-up">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-7">
+                <div class="d-flex justify-content-between align-items-end mb-4">
+                    <div><span class="section-label">Pengumuman</span><h2 class="section-title mb-0">Informasi Terbaru</h2></div>
+                    <a href="/pengumuman" class="fw-semibold small text-warning">Semua <i class="ti ti-arrow-right icon ms-1"></i></a>
+                </div>
                 <?php foreach($pengumuman ?? [] as $p): ?>
                 <a href="/pengumuman/<?= esc($p->slug) ?>" class="text-decoration-none">
                     <div class="tl-item">
@@ -115,20 +124,17 @@
                     </div>
                 </a>
                 <?php endforeach; ?>
-                <!-- Quick Links -->
-                <div class="mt-4"><span class="section-label">Akses Cepat</span></div>
-                <div class="row g-2 mt-2">
-                    <?php
-                    $quickLinks = [
-                        ['icon'=>'calendar-event','label'=>'Agenda','url'=>'/agenda','color'=>'info'],
-                        ['icon'=>'trophy','label'=>'Prestasi','url'=>'/prestasi','color'=>'success'],
-                        ['icon'=>'download','label'=>'Download','url'=>'/download','color'=>'secondary'],
-                        ['icon'=>'users','label'=>'Alumni','url'=>'/alumni','color'=>'warning'],
-                        ['icon'=>'photo','label'=>'Galeri','url'=>'/galeri','color'=>'primary'],
-                        ['icon'=>'video','label'=>'Video','url'=>'/galeri-video','color'=>'red'],
-                    ];
-                    foreach($quickLinks as $ql): ?>
-                    <div class="col-4"><a href="<?= $ql['url'] ?>" class="card card-sm card-link text-decoration-none" style="transition:all .2s;"><div class="card-body text-center py-3 px-2"><i class="ti ti-<?= $ql['icon'] ?> icon text-<?= $ql['color'] ?> d-block mb-1" style="font-size:1.4rem;"></i><small class="text-muted"><?= $ql['label'] ?></small></div></a></div>
+            </div>
+            <div class="col-lg-5">
+                <div class="mb-4"><span class="section-label">Akses Cepat</span></div>
+                <div class="row g-2">
+                    <?php foreach ([
+                        ['calendar-event','Agenda','/agenda','info'],['trophy','Prestasi','/prestasi','success'],
+                        ['download','Download','/download','secondary'],['users','Alumni','/alumni','warning'],
+                        ['photo','Galeri','/galeri','primary'],['video','Video','/galeri-video','red'],
+                        ['help-circle','FAQ','/faq','purple'],['school','PPDB','/ppdb','pink'],
+                    ] as $ql): ?>
+                    <div class="col-3"><a href="<?= $ql[2] ?>" class="card card-sm text-decoration-none" style="transition:all .2s;"><div class="card-body text-center py-3 px-1"><i class="ti ti-<?= $ql[0] ?> icon text-<?= $ql[3] ?> d-block mb-1" style="font-size:1.3rem;"></i><small class="text-muted"><?= $ql[1] ?></small></div></a></div>
                     <?php endforeach; ?>
                 </div>
             </div>
@@ -138,7 +144,7 @@
 
 <!-- ===== GALERI ===== -->
 <?php if(!empty($galeri_home)): ?>
-<section class="bg-white" data-aos="fade-up">
+<section class="bg-soft" data-aos="fade-up">
     <div class="container">
         <div class="section-header"><span class="section-label">Dokumentasi</span><h2 class="section-title">Galeri Kegiatan</h2></div>
         <div class="row g-3">
@@ -155,7 +161,7 @@
 
 <!-- ===== PARTNER ===== -->
 <?php if(!empty($partners)): ?>
-<section class="bg-soft" data-aos="fade-up">
+<section class="bg-white" data-aos="fade-up">
     <div class="container">
         <div class="section-header"><span class="section-label">Kerjasama</span><h2 class="section-title">Partner DU/DI</h2></div>
         <div class="swiper partnerSwiper"><div class="swiper-wrapper align-items-center">
@@ -167,7 +173,7 @@
 
 <!-- ===== TESTIMONI ===== -->
 <?php if(!empty($testimoni)): ?>
-<section class="bg-white" data-aos="fade-up">
+<section class="bg-soft" data-aos="fade-up">
     <div class="container">
         <div class="section-header"><span class="section-label">Testimoni</span><h2 class="section-title">Apa Kata Alumni</h2></div>
         <div class="swiper testiSwiper pb-5"><div class="swiper-wrapper">
@@ -195,10 +201,8 @@
 <?= $this->endSection() ?>
 <?= $this->section('scripts') ?>
 <script>
-// Counter animation
 const co=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.counter').forEach(e=>{const t=parseInt(e.dataset.target),n=t/50;let o=0;const r=setInterval(()=>{o+=n;if(o>=t){o=t;clearInterval(r)}e.textContent=Math.floor(o)},25)});co.unobserve(e.target)}})},{threshold:.4});
 document.getElementById('statRow')&&co.observe(document.getElementById('statRow'));
-// Swipers
 new Swiper('.heroSwiper',{slidesPerView:1,spaceBetween:0,autoplay:{delay:5000,pauseOnMouseEnter:true},loop:true,pagination:{el:'.swiper-pagination',clickable:true},navigation:{nextEl:'.swiper-button-next',prevEl:'.swiper-button-prev'}});
 new Swiper('.partnerSwiper',{slidesPerView:2,spaceBetween:20,autoplay:{delay:2000},loop:true,breakpoints:{640:{slidesPerView:3},1024:{slidesPerView:5}}});
 new Swiper('.testiSwiper',{slidesPerView:1,spaceBetween:20,autoplay:{delay:4000},loop:true,pagination:{el:'.swiper-pagination',clickable:true},breakpoints:{768:{slidesPerView:2},1024:{slidesPerView:3}}});
