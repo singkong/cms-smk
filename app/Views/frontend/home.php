@@ -1,7 +1,48 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
 
-<!-- HERO -->
+<!-- HERO SLIDER -->
+<?php if (!empty($sliders)): ?>
+<section class="hero-slider" id="heroParticles">
+    <?php for($i=0;$i<35;$i++): ?><span class="hero-dot" style="left:<?= rand(0,100) ?>%;top:<?= rand(0,100) ?>%;animation-delay:<?= rand(0,70)/10 ?>s;animation-duration:<?= 5+rand(0,40)/10 ?>s;"></span><?php endfor; ?>
+    <div class="swiper heroSwiper">
+        <div class="swiper-wrapper">
+            <?php foreach ($sliders as $s): ?>
+            <div class="swiper-slide">
+                <div class="hero-content container">
+                    <?php if ($s->image): ?>
+                    <img src="<?= base_url('uploads/sliders/' . $s->image) ?>" alt="<?= esc($s->title) ?>" style="max-width:400px;max-height:200px;margin-bottom:24px;border-radius:12px;">
+                    <?php endif; ?>
+                    <div class="hero-badge"><i class="ti ti-star-filled icon me-1 text-warning"></i> Akreditasi <?= esc($setting->akreditasi ?? 'A') ?></div>
+                    <h1 class="hero-title"><?= esc($s->title) ?></h1>
+                    <?php if ($s->description): ?><p class="hero-desc text-balance"><?= esc($s->description) ?></p><?php endif; ?>
+                    <div class="hero-btns">
+                        <a href="/profil" class="btn-hero btn-hero-primary"><i class="ti ti-info-circle icon"></i> Selengkapnya</a>
+                        <?php if ($s->url): ?><a href="<?= esc($s->url) ?>" class="btn-hero btn-hero-outline"><i class="ti ti-arrow-right icon"></i> Lihat</a><?php endif; ?>
+                        <a href="/ppdb#daftar" class="btn-hero btn-hero-outline"><i class="ti ti-school icon"></i> Daftar PPDB</a>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+    <div class="hero-wave"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 60"><path fill="#f8fafc" d="M0,40L48,44C96,48,192,56,288,52C384,48,480,32,576,32C672,32,768,48,864,52C960,56,1056,48,1152,44C1248,40,1344,40,1392,40L1440,40L1440,60L1392,60C1344,60,1248,60,1152,60C1056,60,960,60,864,60C768,60,672,60,576,60C480,60,384,60,288,60C192,60,96,60,48,60L0,60Z"></path></svg></div>
+</section>
+<style>
+    .hero-slider { position: relative; min-height: 90vh; background: linear-gradient(135deg, #020617 0%, #0f172a 30%, #1e3a5f 60%, #1d4ed8 100%); overflow: hidden; }
+    .hero-slider::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 80%, rgba(37,99,235,0.22) 0%, transparent 55%), radial-gradient(ellipse at 80% 20%, rgba(124,58,237,0.18) 0%, transparent 55%); }
+    .hero-slider .hero-content { padding: 80px 0 60px; }
+    .hero-slider .swiper { width: 100%; height: 100%; }
+    .hero-slider .swiper-pagination-bullet { background: rgba(255,255,255,0.5); }
+    .hero-slider .swiper-pagination-bullet-active { background: #fff; }
+    .hero-slider .swiper-button-prev, .hero-slider .swiper-button-next { color: rgba(255,255,255,0.7); }
+    .hero-slider .swiper-button-prev:hover, .hero-slider .swiper-button-next:hover { color: #fff; }
+</style>
+<?php else: ?>
+<!-- Static Hero (fallback) -->
 <section class="hero" id="heroParticles">
     <?php for($i=0;$i<35;$i++): ?><span class="hero-dot" style="left:<?= rand(0,100) ?>%;top:<?= rand(0,100) ?>%;animation-delay:<?= rand(0,70)/10 ?>s;animation-duration:<?= 5+rand(0,40)/10 ?>s;"></span><?php endfor; ?>
     <div class="hero-content container">
@@ -16,6 +57,7 @@
     </div>
     <div class="hero-wave"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 60"><path fill="#f8fafc" d="M0,40L48,44C96,48,192,56,288,52C384,48,480,32,576,32C672,32,768,48,864,52C960,56,1056,48,1152,44C1248,40,1344,40,1392,40L1440,40L1440,60L1392,60C1344,60,1248,60,1152,60C1056,60,960,60,864,60C768,60,672,60,576,60C480,60,384,60,288,60C192,60,96,60,48,60L0,60Z"></path></svg></div>
 </section>
+<?php endif; ?>
 
 <!-- STATS -->
 <section style="padding-top:20px;" data-aos="fade-up">
@@ -154,6 +196,7 @@
 <script>
 const co=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.counter').forEach(e=>{const t=parseInt(e.dataset.target),n=t/50;let o=0;const r=setInterval(()=>{o+=n;if(o>=t){o=t;clearInterval(r)}e.textContent=Math.floor(o)},25)});co.unobserve(e.target)}})},{threshold:.4});
 document.getElementById('statRow')&&co.observe(document.getElementById('statRow'));
+new Swiper('.heroSwiper',{slidesPerView:1,spaceBetween:0,autoplay:{delay:5000,pauseOnMouseEnter:true},loop:true,pagination:{el:'.swiper-pagination',clickable:true},navigation:{nextEl:'.swiper-button-next',prevEl:'.swiper-button-prev'}});
 new Swiper('.partnerSwiper',{slidesPerView:2,spaceBetween:20,autoplay:{delay:2000,pauseOnMouseEnter:true},loop:true,breakpoints:{640:{slidesPerView:3},1024:{slidesPerView:5}}});
 new Swiper('.testiSwiper',{slidesPerView:1,spaceBetween:20,autoplay:{delay:4000},loop:true,pagination:{el:'.swiper-pagination',clickable:true},breakpoints:{768:{slidesPerView:2},1024:{slidesPerView:3}}});
 </script>
