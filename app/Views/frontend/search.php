@@ -71,7 +71,7 @@
                         <div class="card-body">
                             <div class="d-flex align-items-start gap-3">
                                 <?php if (!empty($row->image)): ?>
-                                    <img src="<?= esc($row->image) ?>" alt="" style="width:100px;height:75px;object-fit:cover;border-radius:8px;" class="flex-shrink-0">
+                                    <img src="<?= base_url('uploads/posts/' . $row->image) ?>" alt="" style="width:100px;height:75px;object-fit:cover;border-radius:8px;" class="flex-shrink-0">
                                 <?php endif; ?>
                                 <div class="flex-grow-1">
                                     <div class="d-flex align-items-center gap-2 mb-1">

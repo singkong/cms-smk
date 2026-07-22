@@ -25,7 +25,7 @@
                         <?php if (!empty($p->image)): ?>
                             <div style="height:200px;overflow:hidden;">
                                 <a href="/prestasi/<?= esc($p->slug) ?>">
-                                    <img src="<?= esc($p->image) ?>" alt="<?= esc($p->title) ?>" class="card-img-top" style="height:100%;width:100%;object-fit:cover;">
+                                    <img src="<?= base_url('uploads/posts/' . $p->image) ?>" alt="<?= esc($p->title) ?>" class="card-img-top" style="height:100%;width:100%;object-fit:cover;">
                                 </a>
                             </div>
                         <?php endif; ?>

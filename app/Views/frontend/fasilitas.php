@@ -25,7 +25,7 @@
                     <div class="card card-sm h-100 shadow-sm border-0">
                         <?php if (!empty($f->gambar)): ?>
                             <div style="height:200px;overflow:hidden;">
-                                <img src="<?= esc($f->gambar) ?>" alt="<?= esc($f->nama) ?>" class="card-img-top" style="height:100%;width:100%;object-fit:cover;">
+                                <img src="<?= base_url('uploads/fasilitas/' . $f->gambar) ?>" alt="<?= esc($f->nama) ?>" class="card-img-top" style="height:100%;width:100%;object-fit:cover;">
                             </div>
                         <?php else: ?>
                             <div class="bg-light d-flex align-items-center justify-content-center" style="height:200px;">

@@ -16,7 +16,7 @@
                 <article>
                     <?php if (!empty($post->image)): ?>
                         <div class="card mb-4">
-                            <img src="<?= esc($post->image) ?>" alt="<?= esc($post->title) ?>" class="card-img-top rounded" style="max-height:450px;object-fit:cover;width:100%;">
+                            <img src="<?= base_url('uploads/posts/' . $post->image) ?>" alt="<?= esc($post->title) ?>" class="card-img-top rounded" style="max-height:450px;object-fit:cover;width:100%;">
                         </div>
                     <?php endif; ?>
 
@@ -91,7 +91,7 @@
                         <a href="/berita/<?= esc($r->slug) ?>" class="list-group-item list-group-item-action">
                             <div class="d-flex align-items-center gap-3">
                                 <?php if (!empty($r->image)): ?>
-                                    <img src="<?= esc($r->image) ?>" alt="" style="width:60px;height:60px;object-fit:cover;border-radius:8px;">
+                                    <img src="<?= base_url('uploads/posts/' . $r->image) ?>" alt="" style="width:60px;height:60px;object-fit:cover;border-radius:8px;">
                                 <?php endif; ?>
                                 <div>
                                     <div class="text-truncate" style="max-width:220px;"><?= esc($r->title) ?></div>

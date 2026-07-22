@@ -15,7 +15,7 @@
             <div class="col-lg-8">
                 <?php if (!empty($jurusan->gambar)): ?>
                     <div class="card mb-4">
-                        <img src="<?= esc($jurusan->gambar) ?>" alt="<?= esc($jurusan->nama) ?>" class="card-img-top rounded" style="max-height:400px;object-fit:cover;">
+                        <img src="<?= base_url('uploads/jurusan/' . $jurusan->gambar) ?>" alt="<?= esc($jurusan->nama) ?>" class="card-img-top rounded" style="max-height:400px;object-fit:cover;">
                     </div>
                 <?php endif; ?>
 

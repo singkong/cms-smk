@@ -16,7 +16,7 @@
                 <article>
                     <div class="card">
                         <?php if (!empty($post->image)): ?>
-                            <img src="<?= esc($post->image) ?>" alt="<?= esc($post->title) ?>" class="card-img-top" style="max-height:400px;object-fit:cover;width:100%;">
+                            <img src="<?= base_url('uploads/posts/' . $post->image) ?>" alt="<?= esc($post->title) ?>" class="card-img-top" style="max-height:400px;object-fit:cover;width:100%;">
                         <?php endif; ?>
                         <div class="card-body p-4">
                             <div class="d-flex align-items-center gap-2 mb-3">
@@ -73,7 +73,7 @@
                                 <a href="/prestasi/<?= esc($r->slug) ?>" class="card card-sm text-reset text-decoration-none h-100">
                                     <div class="card-body">
                                         <?php if (!empty($r->image)): ?>
-                                            <img src="<?= esc($r->image) ?>" alt="" class="rounded mb-2" style="width:100%;height:120px;object-fit:cover;">
+                                            <img src="<?= base_url('uploads/posts/' . $r->image) ?>" alt="" class="rounded mb-2" style="width:100%;height:120px;object-fit:cover;">
                                         <?php endif; ?>
                                         <div class="fw-medium"><?= esc($r->title) ?></div>
                                         <small class="text-muted"><?= date('d M Y', strtotime($r->created_at)) ?></small>
