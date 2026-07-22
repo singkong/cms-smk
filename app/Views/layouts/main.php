@@ -84,8 +84,8 @@
         .hero + *, .home-hero + * { padding-top: 40px !important; }
 
         /* ── PARTICLES ── */
-        .hero-dot { position: absolute; width: 3px; height: 3px; background: rgba(255,255,255,0.45); border-radius: 50%; animation: floatP 7s ease-in-out infinite; pointer-events: none; z-index: 4; }
-        @keyframes floatP { 0%,100% { transform: translateY(0) scale(1); opacity: .3; } 50% { transform: translateY(-30px) scale(2); opacity: 1; } }
+        .hero-dot { position: absolute; width: 6px; height: 6px; background: rgba(255,255,255,0.3); border-radius: 50%; animation: floatP 7s ease-in-out infinite; pointer-events: none; z-index: 4; box-shadow: 0 0 8px rgba(255,255,255,0.4); }
+        @keyframes floatP { 0%,100% { transform: translateY(0) scale(1); opacity: .2; } 50% { transform: translateY(-20px) scale(2.5); opacity: .8; } }
 
         /* ── SECTIONS ── */
         section { padding: 0 0 40px 0; }
