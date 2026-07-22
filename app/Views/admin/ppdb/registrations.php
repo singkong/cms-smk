@@ -116,7 +116,7 @@
                             <option value="">Semua Jurusan</option>
                             <?php foreach ($jurusan_list as $jur): ?>
                             <option value="<?= $jur->id ?>" <?= ($filters['jurusan_id'] ?? '') == $jur->id ? 'selected' : '' ?>>
-                                <?= esc($jur->name) ?>
+                                <?= esc($jur->nama) ?>
                             </option>
                             <?php endforeach; ?>
                         </select>
