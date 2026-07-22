@@ -1,9 +1,8 @@
-<div class="page-header d-print-none">
+<div class="page-header d-print-none" style="position:sticky;top:0;z-index:100;background:#f1f5f9;margin:0;padding:16px 0;border-bottom:1px solid #e2e8f0;">
     <div class="container-xl">
         <div class="row g-2 align-items-center">
             <div class="col">
-                <div class="page-pretitle"><?= esc($pretitle ?? 'Overview') ?></div>
-                <h2 class="page-title"><?= esc($title ?? 'Dashboard') ?></h2>
+                <h2 class="page-title mb-0"><?= esc($title ?? 'Dashboard') ?></h2>
             </div>
             <div class="col-auto ms-auto d-print-none">
                 <div class="d-flex align-items-center gap-3">
