@@ -1,0 +1,17 @@
+﻿<?= $this->extend('layouts/admin') ?>
+<?= $this->section('content') ?>
+<div class="d-flex justify-content-between align-items-center mb-3"><div></div><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAdd"><i class="ti ti-plus icon me-1"></i> Tambah</button></div>
+<?php if (session()->getFlashdata('errors')): ?><div class="alert alert-danger"><?php foreach (session()->getFlashdata('errors') as $e): ?><div><?= $e ?></div><?php endforeach; ?></div><?php endif; ?>
+<div class="card"><div class="table-responsive"><table class="table table-vcenter card-table"><thead><tr><th>#</th><th>Pertanyaan</th><th>Jawaban</th><th>Sort</th><th width="100">Aksi</th></tr></thead><tbody>
+<?php foreach ($items as $i => $item): ?><tr><td><?= $i + 1 ?></td><td class="fw-semibold"><?= esc($item->question) ?></td><td><?= esc(word_limiter($item->answer ?? '', 15)) ?></td><td><?= $item->sort_order ?></td><td><button class="btn btn-sm btn-icon btn-ghost-warning" data-bs-toggle="modal" data-bs-target="#modalEdit<?= $item->id ?>"><i class="ti ti-pencil icon"></i></button><a href="/admin/faq/delete/<?= $item->id ?>" class="btn btn-sm btn-icon btn-ghost-danger" onclick="return confirm('Hapus?')"><i class="ti ti-trash icon"></i></a></td></tr><?php endforeach; ?></tbody></table></div></div>
+
+<?php if (!empty($pager)): ?><div class="mt-3"><?= $pager ?></div><?php endif; ?>
+
+<!-- Modal Add -->
+<div class="modal fade" id="modalAdd"><div class="modal-dialog modal-lg"><div class="modal-content"><form action="/admin/faq/store" method="post"><?= csrf_field() ?><div class="modal-header"><h5 class="modal-title">Tambah FAQ</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="mb-3"><label class="form-label">Pertanyaan</label><input type="text" name="question" class="form-control" required></div><div class="mb-3"><label class="form-label">Jawaban</label><textarea name="answer" class="form-control" rows="5" required></textarea></div><div class="row g-3"><div class="col-md-3"><label class="form-label">Sort</label><input type="number" name="sort_order" class="form-control" value="0"></div></div></div><div class="modal-footer"><button type="submit" class="btn btn-primary">Simpan</button></div></form></div></div></div>
+
+<!-- Modal Edit templates -->
+<?php foreach ($items as $item): ?>
+<div class="modal fade" id="modalEdit<?= $item->id ?>"><div class="modal-dialog modal-lg"><div class="modal-content"><form action="/admin/faq/update/<?= $item->id ?>" method="post"><?= csrf_field() ?><div class="modal-header"><h5 class="modal-title">Edit FAQ</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="mb-3"><label class="form-label">Pertanyaan</label><input type="text" name="question" class="form-control" value="<?= esc($item->question) ?>" required></div><div class="mb-3"><label class="form-label">Jawaban</label><textarea name="answer" class="form-control" rows="5" required><?= esc($item->answer) ?></textarea></div><div class="row g-3"><div class="col-md-3"><label class="form-label">Sort</label><input type="number" name="sort_order" class="form-control" value="<?= $item->sort_order ?>"></div></div></div><div class="modal-footer"><button type="submit" class="btn btn-primary">Update</button></div></form></div></div></div>
+<?php endforeach; ?>
+<?= $this->endSection() ?>

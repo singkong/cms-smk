@@ -1,0 +1,35 @@
+# CodeIgniter 4 default .gitignore
+
+# Environment
+.env
+
+# Build
+builds/
+
+# Composer
+vendor/
+composer.phar
+
+# CodeIgniter
+writable/cache/
+writable/debugbar/
+writable/logs/
+writable/session/
+writable/sessions/
+writable/uploads/
+writable/*.db
+public/writable/
+
+# IDE
+.idea/
+.vscode/
+*.sublime-*
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Uploads (user content)
+public/uploads/*
+!public/uploads/.gitkeep
