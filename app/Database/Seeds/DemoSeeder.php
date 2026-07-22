@@ -278,6 +278,12 @@ class DemoSeeder extends Seeder
             'tanggal_tutup' => date('Y-m-d', strtotime('+60 days')),
             'biaya_pendaftaran' => 250000,
             'kontak_info' => 'Hubungi panitia PPDB di (021) 12345678 atau WA 6281234567890',
+            'persyaratan' => "1. Fotokopi Ijazah SMP/sederajat yang telah dilegalisir (2 lembar)\n2. Fotokopi SKHU/SKHUN (2 lembar)\n3. Fotokopi Akta Kelahiran (2 lembar)\n4. Fotokopi Kartu Keluarga (2 lembar)\n5. Pas Foto ukuran 3x4 (4 lembar)\n6. Surat Keterangan Sehat dari Dokter\n7. Surat Keterangan Berkelakuan Baik dari Sekolah Asal",
+            'jadwal' => "Pendaftaran Online : 1 Mei - 30 Juni 2024\nVerifikasi Berkas  : 1 - 15 Juli 2024\nPengumuman         : 20 Juli 2024\nDaftar Ulang       : 21 - 31 Juli 2024",
+            'alur' => "1. Calon peserta didik melakukan pendaftaran online melalui website PPDB\n2. Mengisi formulir pendaftaran dengan data yang benar\n3. Mengunggah dokumen persyaratan\n4. Panitia melakukan verifikasi berkas\n5. Pengumuman hasil seleksi melalui website\n6. Peserta yang diterima melakukan daftar ulang",
+            'biaya' => "Biaya Pendaftaran : Rp 250.000\nSPP Bulanan       : Rp 150.000\nDana Pengembangan : Rp 1.500.000 (dibayarkan sekali selama 3 tahun)",
+            'formulir_link' => null,
+            'kuota' => 360,
             'created_at' => $now, 'updated_at' => $now,
         ]);
 
