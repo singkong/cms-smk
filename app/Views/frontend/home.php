@@ -7,7 +7,8 @@
     <?php if (!empty($sliders)): ?>
     <div class="swiper heroSwiper"><div class="swiper-wrapper">
         <?php foreach ($sliders as $s): ?>
-        <div class="swiper-slide"><div class="hero-content container text-center">
+        <div class="swiper-slide" <?= $s->image ? 'style="background:linear-gradient(135deg,rgba(2,6,23,0.75),rgba(15,23,42,0.8)),url(\''.base_url('uploads/sliders/'.$s->image).'\') center/cover no-repeat"' : '' ?>>
+        <div class="hero-content container text-center">
             <div class="hero-badge"><i class="ti ti-star-filled icon me-1 text-warning"></i> Akreditasi <?= esc($setting->akreditasi ?? 'A') ?></div>
             <h1 class="hero-title"><?= esc($s->title) ?></h1>
             <?php if ($s->description): ?><p class="hero-desc text-balance"><?= esc($s->description) ?></p><?php endif; ?>
