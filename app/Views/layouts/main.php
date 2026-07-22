@@ -78,8 +78,9 @@
         .btn-hero-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
         .btn-hero-outline { border: 1.5px solid rgba(255,255,255,0.35); color: #fff; }
         .btn-hero-outline:hover { background: rgba(255,255,255,0.07); border-color: #fff; transform: translateY(-2px); }
-        .hero-wave { position: absolute; bottom: -1px; left: 0; width: 100%; line-height: 0; }
+        .hero-wave { position: absolute; bottom: -1px; left: 0; width: 100%; line-height: 0; z-index: 3; }
         .hero-wave svg { width: 100%; height: 50px; }
+        .hero + *, .home-hero + * { padding-top: 40px !important; }
 
         /* ── PARTICLES ── */
         .hero-dot { position: absolute; width: 3px; height: 3px; background: rgba(255,255,255,0.45); border-radius: 50%; animation: floatP 7s ease-in-out infinite; pointer-events: none; }

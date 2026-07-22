@@ -36,7 +36,7 @@
 </section>
 
 <!-- ===== STATS ===== -->
-<section style="padding-top:10px;" data-aos="fade-up">
+<section data-aos="fade-up">
     <div class="container">
         <div class="row g-3" id="statRow">
             <?php
