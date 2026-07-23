@@ -92,7 +92,7 @@
         @keyframes floatP { 0%,100% { transform: translateY(0) scale(1); opacity: .2; } 50% { transform: translateY(-20px) scale(2.5); opacity: .8; } }
 
         /* ── SECTIONS ── */
-        section { padding: 0 0 40px 0; }
+        section { padding: 70px 0; }
         .section-label {
             display: inline-block; padding: 4px 14px; background: rgba(37,99,235,0.06);
             color: var(--c-primary); border-radius: 50px; font-size: .7rem; font-weight: 700;
@@ -114,15 +114,14 @@
 
         /* ── STATS ── */
         .stat-card {
-            background: var(--c-white); border-radius: var(--radius); padding: 24px 16px; text-align: center;
+            background: var(--c-white); border-radius: var(--radius-sm); padding: 20px 14px; text-align: center;
             border: 1px solid var(--c-border); transition: all .3s; position: relative; overflow: hidden;
         }
-        .stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--c-primary), var(--c-accent)); transform: scaleX(0); transition: transform .4s ease; }
-        .stat-card:hover::before { transform: scaleX(1); }
-        .stat-card:hover { transform: translateY(-4px); box-shadow: 0 12px 35px rgba(0,0,0,0.07); }
-        .stat-icon { font-size: 1.7rem; margin-bottom: 6px; }
-        .stat-number { font-size: 1.7rem; font-weight: 800; color: var(--c-dark); letter-spacing: -1px; }
-        .stat-label { color: var(--c-muted); font-weight: 500; font-size: .78rem; }
+        .stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.06); }
+        .stat-icon-wrap { width: 48px; height: 48px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 10px; }
+        .stat-number { font-size: 1.6rem; font-weight: 800; color: var(--c-dark); }
+        .stat-suffix { font-size: 1rem; font-weight: 700; color: var(--c-muted); }
+        .stat-label { color: var(--c-muted); font-weight: 500; font-size: .75rem; margin-top: 2px; }
 
         /* ── KEPSEK ── */
         .kepsek-card {
@@ -156,6 +155,8 @@
         .gallery-item:hover img { transform: scale(1.1); }
         .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.65), transparent 60%); display: flex; align-items: flex-end; padding: 16px; opacity: 0; transition: all .3s; }
         .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .quick-link-card { transition: all .25s; border: 1px solid var(--c-border); border-radius: var(--radius-xs); }
+        .quick-link-card:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.06); border-color: var(--c-primary); }
 
         /* ── CTA ── */
         .cta { background: linear-gradient(135deg, #0f172a, #1e293b); padding: 64px 0; text-align: center; color: #fff; }

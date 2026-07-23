@@ -3,19 +3,19 @@
 
 <!-- ===== HERO ===== -->
 <section class="home-hero" id="heroParticles">
-    <?php for($i=0;$i<35;$i++): ?><span class="hero-dot" style="left:<?= rand(0,100) ?>%;top:<?= rand(0,100) ?>%;animation-delay:<?= rand(0,70)/10 ?>s;animation-duration:<?= 5+rand(0,40)/10 ?>s;"></span><?php endfor; ?>
+    <?php for($i=0;$i<40;$i++): ?><span class="hero-dot" style="left:<?= rand(0,100) ?>%;top:<?= rand(0,100) ?>%;animation-delay:<?= rand(0,70)/10 ?>s;animation-duration:<?= 5+rand(0,40)/10 ?>s;"></span><?php endfor; ?>
     <?php if (!empty($sliders)): ?>
     <div class="swiper heroSwiper"><div class="swiper-wrapper">
         <?php foreach ($sliders as $s): ?>
-        <div class="swiper-slide" <?= $s->image ? 'style="background:linear-gradient(135deg,rgba(2,6,23,0.75),rgba(15,23,42,0.8)),url(\''.base_url('uploads/sliders/'.$s->image).'\') center/cover no-repeat"' : '' ?>>
+        <div class="swiper-slide" <?= $s->image ? 'style="background:linear-gradient(135deg,rgba(2,6,23,0.7),rgba(15,23,42,0.75)),url(\''.base_url('uploads/sliders/'.$s->image).'\') center/cover no-repeat"' : '' ?>>
             <div class="hero-content container text-center">
                 <div class="hero-badge"><i class="ti ti-star-filled icon me-1 text-warning"></i> Akreditasi <?= esc($setting->akreditasi ?? 'A') ?></div>
                 <h1 class="hero-title"><?= esc($s->title) ?></h1>
                 <?php if ($s->description): ?><p class="hero-desc"><?= esc($s->description) ?></p><?php endif; ?>
                 <div class="hero-btns">
-                    <a href="/profil" class="btn-hero btn-hero-primary"><i class="ti ti-info-circle icon"></i> Profil Sekolah</a>
-                    <?php if ($s->url): ?><a href="<?= esc($s->url) ?>" class="btn-hero btn-hero-outline"><i class="ti ti-arrow-right icon"></i> Selengkapnya</a><?php endif; ?>
-                    <a href="/ppdb#daftar" class="btn-hero btn-hero-outline"><i class="ti ti-school icon"></i> Daftar PPDB</a>
+                    <a href="/profil" class="btn-hero btn-hero-primary"><i class="ti ti-info-circle icon"></i> Profil</a>
+                    <a href="/ppdb#daftar" class="btn-hero btn-hero-outline"><i class="ti ti-school icon"></i> PPDB</a>
+                    <a href="/kontak" class="btn-hero btn-hero-outline"><i class="ti ti-message icon"></i> Kontak</a>
                 </div>
             </div>
         </div>
@@ -27,9 +27,9 @@
         <h1 class="hero-title">Selamat Datang di<br><span><?= esc($setting->nama_sekolah) ?></span></h1>
         <p class="hero-desc"><?= esc($setting->deskripsi ?? 'Mencetak generasi unggul, kompeten, dan berdaya saing global.') ?></p>
         <div class="hero-btns">
-            <a href="/profil" class="btn-hero btn-hero-primary"><i class="ti ti-info-circle icon"></i> Profil Sekolah</a>
-            <a href="/ppdb#daftar" class="btn-hero btn-hero-outline"><i class="ti ti-school icon"></i> Daftar PPDB</a>
-            <a href="/kontak" class="btn-hero btn-hero-outline"><i class="ti ti-message icon"></i> Hubungi Kami</a>
+            <a href="/profil" class="btn-hero btn-hero-primary"><i class="ti ti-info-circle icon"></i> Profil</a>
+            <a href="/ppdb#daftar" class="btn-hero btn-hero-outline"><i class="ti ti-school icon"></i> PPDB</a>
+            <a href="/kontak" class="btn-hero btn-hero-outline"><i class="ti ti-message icon"></i> Kontak</a>
         </div>
     </div>
     <?php endif; ?>
@@ -39,18 +39,24 @@
 <!-- ===== STATS ===== -->
 <section data-aos="fade-up">
     <div class="container">
-        <div class="row g-4" id="statRow">
+        <div class="row g-3" id="statRow">
             <?php foreach ([
-                ['icon'=>'users','color'=>'primary','number'=>count($jurusans??[])*80+rand(0,50),'label'=>'Siswa Aktif','suffix'=>'+'],
-                ['icon'=>'user-star','color'=>'success','number'=>$total_guru??50,'label'=>'Guru Profesional','suffix'=>'+'],
-                ['icon'=>'building','color'=>'warning','number'=>count($jurusans??[]),'label'=>'Kompetensi Keahlian','suffix'=>''],
-                ['icon'=>'trophy','color'=>'red','number'=>$total_prestasi??120,'label'=>'Prestasi','suffix'=>'+'],
+                ['icon'=>'users','color'=>'#2563eb','number'=>count($jurusans??[])*80+20,'label'=>'Siswa Aktif'],
+                ['icon'=>'user-star','color'=>'#22c55e','number'=>$total_guru??50,'label'=>'Guru'],
+                ['icon'=>'building','color'=>'#f59e0b','number'=>count($jurusans??[]),'label'=>'Jurusan'],
+                ['icon'=>'trophy','color'=>'#ef4444','number'=>$total_prestasi??120,'label'=>'Prestasi'],
             ] as $st): ?>
-            <div class="col-6 col-md-3"><div class="stat-card">
-                <div class="stat-icon text-<?= $st['color'] ?>"><i class="ti ti-<?= $st['icon'] ?> icon"></i></div>
-                <div class="stat-number"><?= ($st['suffix'] ?? '') ? '<span class="counter" data-target="'.$st['number'].'">0</span>'.$st['suffix'] : '<span>'.$st['number'].'</span>' ?></div>
-                <div class="stat-label"><?= $st['label'] ?></div>
-            </div></div>
+            <div class="col-6 col-md-3">
+                <div class="stat-card">
+                    <span class="stat-icon-wrap" style="background:<?= $st['color'] ?>15;color:<?= $st['color'] ?>;">
+                        <i class="ti ti-<?= $st['icon'] ?> icon"></i>
+                    </span>
+                    <div class="stat-number">
+                        <span class="counter" data-target="<?= $st['number'] ?>">0</span><span class="stat-suffix">+</span>
+                    </div>
+                    <div class="stat-label"><?= $st['label'] ?></div>
+                </div>
+            </div>
             <?php endforeach; ?>
         </div>
     </div>
@@ -60,7 +66,7 @@
 <?php if(!empty($jurusans)): ?>
 <section class="bg-white" data-aos="fade-up">
     <div class="container">
-        <div class="section-header"><span class="section-label">Program Keahlian</span><h2 class="section-title">Kompetensi Keahlian</h2><p class="section-desc mx-auto">Pilihan program keahlian unggulan sesuai kebutuhan industri</p></div>
+        <div class="section-header"><span class="section-label">Program Keahlian</span><h2 class="section-title">Kompetensi Keahlian</h2><p class="section-desc mx-auto">Pilihan program unggulan sesuai kebutuhan industri</p></div>
         <div class="row g-4">
             <?php foreach($jurusans as $i=>$j): ?>
             <div class="col-md-4" data-aos="fade-up" data-aos-delay="<?=$i*80?>">
@@ -77,7 +83,7 @@
             </div>
             <?php endforeach; ?>
         </div>
-        <div class="text-center mt-5"><a href="/jurusan" class="btn btn-primary rounded-pill px-5 py-2">Lihat Semua Jurusan <i class="ti ti-arrow-right icon ms-2"></i></a></div>
+        <div class="text-center mt-5"><a href="/jurusan" class="btn btn-primary rounded-pill px-5 py-2">Lihat Semua <i class="ti ti-arrow-right icon ms-2"></i></a></div>
     </div>
 </section>
 <?php endif; ?>
@@ -87,7 +93,7 @@
     <div class="container">
         <div class="d-flex justify-content-between align-items-end mb-4">
             <div><span class="section-label">Informasi</span><h2 class="section-title mb-0">Berita Terbaru</h2></div>
-            <a href="/berita" class="fw-semibold small">Lihat Semua <i class="ti ti-arrow-right icon ms-1"></i></a>
+            <a href="/berita" class="fw-semibold small">Semua <i class="ti ti-arrow-right icon ms-1"></i></a>
         </div>
         <div class="row g-4">
             <?php foreach($berita as $i=>$post): ?>
@@ -95,9 +101,9 @@
                 <div class="card-elevate h-100">
                     <?php if($post->image): ?><div class="card-img-wrap"><img src="<?= base_url('uploads/posts/'.$post->image) ?>" alt="<?= esc($post->title) ?>" loading="lazy"></div><?php endif; ?>
                     <div class="card-body p-4 d-flex flex-column">
-                        <div class="small text-muted mb-2"><i class="ti ti-calendar icon me-1"></i><?= date('d M Y',strtotime($post->created_at)) ?></div>
+                        <div class="small text-muted mb-2"><i class="ti ti-calendar icon me-1"></i><?= date('d M',strtotime($post->created_at)) ?></div>
                         <h5 class="fw-bold mb-2 lh-sm"><?= esc($post->title) ?></h5>
-                        <p class="text-muted small flex-grow-1"><?= character_limiter(strip_tags($post->content??''), 80) ?></p>
+                        <p class="text-muted small flex-grow-1"><?= character_limiter(strip_tags($post->content??''), 70) ?></p>
                         <a href="/berita/<?= esc($post->slug) ?>" class="btn btn-outline-primary rounded-pill btn-sm mt-2 align-self-start">Baca <i class="ti ti-arrow-right icon ms-1"></i></a>
                     </div>
                 </div>
@@ -113,7 +119,7 @@
         <div class="row g-5">
             <div class="col-lg-7">
                 <div class="d-flex justify-content-between align-items-end mb-4">
-                    <div><span class="section-label">Pengumuman</span><h2 class="section-title mb-0">Informasi Terbaru</h2></div>
+                    <div><span class="section-label">Pengumuman</span><h2 class="section-title mb-0">Terbaru</h2></div>
                     <a href="/pengumuman" class="fw-semibold small text-warning">Semua <i class="ti ti-arrow-right icon ms-1"></i></a>
                 </div>
                 <?php foreach($pengumuman ?? [] as $p): ?>
@@ -134,7 +140,7 @@
                         ['photo','Galeri','/galeri','primary'],['video','Video','/galeri-video','red'],
                         ['help-circle','FAQ','/faq','purple'],['school','PPDB','/ppdb','pink'],
                     ] as $ql): ?>
-                    <div class="col-3"><a href="<?= $ql[2] ?>" class="card card-sm text-decoration-none" style="transition:all .2s;"><div class="card-body text-center py-3 px-1"><i class="ti ti-<?= $ql[0] ?> icon text-<?= $ql[3] ?> d-block mb-1" style="font-size:1.3rem;"></i><small class="text-muted"><?= $ql[1] ?></small></div></a></div>
+                    <div class="col-3"><a href="<?= $ql[2] ?>" class="card card-sm text-decoration-none quick-link-card"><div class="card-body text-center py-3 px-1"><i class="ti ti-<?= $ql[0] ?> icon text-<?= $ql[3] ?> d-block mb-1" style="font-size:1.3rem;"></i><small class="text-muted"><?= $ql[1] ?></small></div></a></div>
                     <?php endforeach; ?>
                 </div>
             </div>
@@ -189,12 +195,12 @@
 </section>
 <?php endif; ?>
 
-<!-- ===== CTA PPDB ===== -->
+<!-- ===== CTA ===== -->
 <section class="cta" data-aos="fade-up">
     <div class="container">
         <h2 class="fw-bold mb-3">Siap Bergabung Menjadi Generasi Unggul?</h2>
-        <p class="mb-4 text-white-50">Daftarkan diri Anda sekarang di <?= esc($setting->nama_sekolah ?? 'sekolah kami') ?></p>
-        <a href="/ppdb#daftar" class="btn-hero btn-hero-primary" style="display:inline-flex;"><i class="ti ti-school icon me-2"></i> Daftar PPDB Sekarang</a>
+        <p class="mb-4 text-white-50">Daftarkan diri Anda di <?= esc($setting->nama_sekolah ?? 'sekolah kami') ?></p>
+        <a href="/ppdb#daftar" class="btn-hero btn-hero-primary" style="display:inline-flex;"><i class="ti ti-school icon me-2"></i> Daftar PPDB</a>
     </div>
 </section>
 
@@ -203,7 +209,7 @@
 <script>
 const co=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.counter').forEach(e=>{const t=parseInt(e.dataset.target),n=t/50;let o=0;const r=setInterval(()=>{o+=n;if(o>=t){o=t;clearInterval(r)}e.textContent=Math.floor(o)},25)});co.unobserve(e.target)}})},{threshold:.4});
 document.getElementById('statRow')&&co.observe(document.getElementById('statRow'));
-new Swiper('.heroSwiper',{slidesPerView:1,spaceBetween:0,autoplay:{delay:5000,pauseOnMouseEnter:true},loop:true,pagination:{el:'.swiper-pagination',clickable:true},navigation:{nextEl:'.swiper-button-next',prevEl:'.swiper-button-prev'}});
+new Swiper('.heroSwiper',{slidesPerView:1,autoplay:{delay:5000,pauseOnMouseEnter:true},loop:true,pagination:{el:'.swiper-pagination',clickable:true},navigation:{nextEl:'.swiper-button-next',prevEl:'.swiper-button-prev'}});
 new Swiper('.partnerSwiper',{slidesPerView:2,spaceBetween:20,autoplay:{delay:2000},loop:true,breakpoints:{640:{slidesPerView:3},1024:{slidesPerView:5}}});
 new Swiper('.testiSwiper',{slidesPerView:1,spaceBetween:20,autoplay:{delay:4000},loop:true,pagination:{el:'.swiper-pagination',clickable:true},breakpoints:{768:{slidesPerView:2},1024:{slidesPerView:3}}});
 </script>
