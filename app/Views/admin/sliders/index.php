@@ -1,17 +1,126 @@
 ﻿<?= $this->extend('layouts/admin') ?>
 <?= $this->section('content') ?>
-<div class="d-flex justify-content-between align-items-center mb-3"><div></div><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAdd"><i class="ti ti-plus icon me-1"></i> Tambah</button></div>
-<?php if (session()->getFlashdata('errors')): ?><div class="alert alert-danger"><?php foreach (session()->getFlashdata('errors') as $e): ?><div><?= $e ?></div><?php endforeach; ?></div><?php endif; ?>
-<div class="card"><div class="table-responsive"><table class="table table-vcenter card-table"><thead><tr><th>#</th><th>Gambar</th><th>Judul</th><th>URL</th><th>Status</th><th width="100">Aksi</th></tr></thead><tbody>
-<?php foreach ($items as $i => $item): ?><tr><td><?= $i + 1 ?></td><td><?php if ($item->image): ?><span class="avatar avatar-sm" style="background-image:url(<?= base_url('uploads/sliders/'.$item->image) ?>)"></span><?php else: ?><span class="avatar avatar-sm"><?= strtoupper(substr($item->title ?? 'S',0,1)) ?></span><?php endif; ?></td><td class="fw-semibold"><?= esc($item->title) ?></td><td><?php if ($item->url): ?><a href="<?= esc($item->url) ?>" target="_blank" class="text-muted"><?= esc($item->url) ?></a><?php else: ?>-<?php endif; ?></td><td><?= $item->is_active ? '<span class="badge bg-success">Aktif</span>' : '<span class="badge bg-danger">Nonaktif</span>' ?></td><td><button class="btn btn-sm btn-icon btn-ghost-warning" data-bs-toggle="modal" data-bs-target="#modalEdit<?= $item->id ?>"><i class="ti ti-pencil icon"></i></button><a href="/admin/sliders/delete/<?= $item->id ?>" class="btn btn-sm btn-icon btn-ghost-danger" onclick="return confirm('Hapus?')"><i class="ti ti-trash icon"></i></a></td></tr><?php endforeach; ?></tbody></table></div></div>
 
-<?php if (!empty($pager)): ?><div class="mt-3"><?= $pager ?></div><?php endif; ?>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div></div>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAdd">
+        <i class="ti ti-plus icon me-1"></i> Tambah Slider
+    </button>
+</div>
+
+<?php if (session()->getFlashdata('errors')): ?><div class="alert alert-danger"><?php foreach (session()->getFlashdata('errors') as $e): ?><div><?= $e ?></div><?php endforeach; ?></div><?php endif; ?>
+<?php if (session()->getFlashdata('success')): ?><div class="alert alert-success"><?= session()->getFlashdata('success') ?></div><?php endif; ?>
+
+<div class="card">
+    <div class="table-responsive">
+        <table class="table table-vcenter card-table">
+            <thead><tr><th>#</th><th>Gambar</th><th>Judul</th><th>URL</th><th>Status</th><th width="100">Aksi</th></tr></thead>
+            <tbody>
+                <?php if (!empty($items)): foreach ($items as $i => $item): ?>
+                <tr>
+                    <td><?= $i + 1 ?></td>
+                    <td>
+                        <?php if ($item->image): ?><img src="<?= base_url('uploads/sliders/'.$item->image) ?>" style="width:60px;height:35px;object-fit:cover;border-radius:6px;" alt=""><?php else: ?><span class="badge bg-secondary">-</span><?php endif; ?>
+                    </td>
+                    <td class="fw-semibold"><?= esc($item->title) ?></td>
+                    <td><?= $item->url ? '<a href="'.esc($item->url).'" target="_blank" class="text-muted small">'.esc($item->url).'</a>' : '-' ?></td>
+                    <td><?= $item->is_active ? '<span class="badge bg-success">Aktif</span>' : '<span class="badge bg-danger">Nonaktif</span>' ?></td>
+                    <td>
+                        <button class="btn btn-sm btn-icon btn-ghost-warning" data-bs-toggle="modal" data-bs-target="#modalEdit<?= $item->id ?>"><i class="ti ti-pencil icon"></i></button>
+                        <a href="/admin/sliders/delete/<?= $item->id ?>" class="btn btn-sm btn-icon btn-ghost-danger" onclick="return confirm('Hapus?')"><i class="ti ti-trash icon"></i></a>
+                    </td>
+                </tr>
+                <?php endforeach; else: ?>
+                <tr><td colspan="6" class="text-center py-4 text-muted">Belum ada slider.</td></tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <!-- Modal Add -->
-<div class="modal fade" id="modalAdd"><div class="modal-dialog modal-lg"><div class="modal-content"><form action="/admin/sliders/store" method="post" enctype="multipart/form-data"><?= csrf_field() ?><div class="modal-header"><h5 class="modal-title">Tambah Slider</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="row g-3"><div class="col-md-6"><label class="form-label">Judul</label><input type="text" name="title" class="form-control" required></div><div class="col-md-6"><label class="form-label">URL</label><input type="text" name="url" class="form-control"></div><div class="col-md-6"><label class="form-label">Gambar</label><input type="file" name="image" class="form-control" accept="image/*"></div><div class="col-md-6"><label class="form-label">Deskripsi</label><input type="text" name="description" class="form-control"></div><div class="col-md-3"><label class="form-label">Sort</label><input type="number" name="sort_order" class="form-control" value="0"></div><div class="col-md-3 d-flex align-items-end pb-2"><label class="form-check form-switch"><input class="form-check-input" type="checkbox" name="is_active" value="1" checked><span class="form-check-label">Aktif</span></label></div></div></div><div class="modal-footer"><button type="submit" class="btn btn-primary">Simpan</button></div></form></div></div></div>
+<div class="modal fade" id="modalAdd" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form action="/admin/sliders/store" method="post" enctype="multipart/form-data">
+                <?= csrf_field() ?>
+                <div class="modal-header"><h5 class="modal-title">Tambah Slider</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6"><label class="form-label">Judul</label><input type="text" name="title" class="form-control" required></div>
+                        <div class="col-md-6"><label class="form-label">URL (opsional)</label><input type="text" name="url" class="form-control" placeholder="/halaman atau https://..."></div>
+                        <div class="col-md-6">
+                            <label class="form-label">Gambar</label>
+                            <input type="file" name="image" class="form-control" accept="image/*" onchange="previewImage(this, 'previewAdd')">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">&nbsp;</label>
+                            <div id="previewAdd" class="rounded-3 bg-light d-flex align-items-center justify-content-center" style="height:80px;overflow:hidden;">
+                                <span class="text-muted small">Pratinjau gambar</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6"><label class="form-label">Deskripsi</label><input type="text" name="description" class="form-control"></div>
+                        <div class="col-3"><label class="form-label">Sort Order</label><input type="number" name="sort_order" class="form-control" value="0"></div>
+                        <div class="col-3 d-flex align-items-end pb-2"><label class="form-check form-switch"><input class="form-check-input" type="checkbox" name="is_active" value="1" checked><span class="form-check-label">Aktif</span></label></div>
+                    </div>
+                </div>
+                <div class="modal-footer"><button type="submit" class="btn btn-primary">Simpan</button></div>
+            </form>
+        </div>
+    </div>
+</div>
 
-<!-- Modal Edit templates -->
-<?php foreach ($items as $item): ?>
-<div class="modal fade" id="modalEdit<?= $item->id ?>"><div class="modal-dialog modal-lg"><div class="modal-content"><form action="/admin/sliders/update/<?= $item->id ?>" method="post" enctype="multipart/form-data"><?= csrf_field() ?><div class="modal-header"><h5 class="modal-title">Edit: <?= esc($item->title) ?></h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="row g-3"><div class="col-md-6"><label class="form-label">Judul</label><input type="text" name="title" class="form-control" value="<?= esc($item->title) ?>" required></div><div class="col-md-6"><label class="form-label">URL</label><input type="text" name="url" class="form-control" value="<?= esc($item->url) ?>"></div><div class="col-md-6"><label class="form-label">Gambar</label><input type="file" name="image" class="form-control" accept="image/*"><?php if ($item->image): ?><small class="text-muted d-block mt-1">Current: <?= $item->image ?></small><?php endif; ?></div><div class="col-md-6"><label class="form-label">Deskripsi</label><input type="text" name="description" class="form-control" value="<?= esc($item->description) ?>"></div><div class="col-md-3"><label class="form-label">Sort</label><input type="number" name="sort_order" class="form-control" value="<?= $item->sort_order ?>"></div><div class="col-md-3 d-flex align-items-end pb-2"><label class="form-check form-switch"><input class="form-check-input" type="checkbox" name="is_active" value="1" <?= $item->is_active ? 'checked' : '' ?>><span class="form-check-label">Aktif</span></label></div></div></div><div class="modal-footer"><button type="submit" class="btn btn-primary">Update</button></div></form></div></div></div>
-<?php endforeach; ?>
+<!-- Modal Edit -->
+<?php if (!empty($items)): foreach ($items as $item): ?>
+<div class="modal fade" id="modalEdit<?= $item->id ?>" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form action="/admin/sliders/update/<?= $item->id ?>" method="post" enctype="multipart/form-data">
+                <?= csrf_field() ?>
+                <div class="modal-header"><h5 class="modal-title">Edit: <?= esc($item->title) ?></h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6"><label class="form-label">Judul</label><input type="text" name="title" class="form-control" value="<?= esc($item->title) ?>" required></div>
+                        <div class="col-md-6"><label class="form-label">URL</label><input type="text" name="url" class="form-control" value="<?= esc($item->url) ?>" placeholder="/halaman atau https://..."></div>
+                        <div class="col-md-6">
+                            <label class="form-label">Gambar</label>
+                            <input type="file" name="image" class="form-control" accept="image/*" onchange="previewImage(this, 'previewEdit<?= $item->id ?>')">
+                            <?php if ($item->image): ?><small class="text-muted d-block mt-1">Current: <?= $item->image ?></small><?php endif; ?>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">&nbsp;</label>
+                            <div id="previewEdit<?= $item->id ?>" class="rounded-3 bg-light d-flex align-items-center justify-content-center" style="height:80px;overflow:hidden;">
+                                <?php if ($item->image): ?>
+                                <img src="<?= base_url('uploads/sliders/'.$item->image) ?>" style="width:100%;height:100%;object-fit:cover;">
+                                <?php else: ?>
+                                <span class="text-muted small">Pratinjau gambar</span>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <div class="col-md-6"><label class="form-label">Deskripsi</label><input type="text" name="description" class="form-control" value="<?= esc($item->description) ?>"></div>
+                        <div class="col-3"><label class="form-label">Sort Order</label><input type="number" name="sort_order" class="form-control" value="<?= $item->sort_order ?>"></div>
+                        <div class="col-3 d-flex align-items-end pb-2"><label class="form-check form-switch"><input class="form-check-input" type="checkbox" name="is_active" value="1" <?= $item->is_active ? 'checked' : '' ?>><span class="form-check-label">Aktif</span></label></div>
+                    </div>
+                </div>
+                <div class="modal-footer"><button type="submit" class="btn btn-primary">Update</button></div>
+            </form>
+        </div>
+    </div>
+</div>
+<?php endforeach; endif; ?>
+
+<script>
+function previewImage(input, targetId) {
+    var container = document.getElementById(targetId);
+    container.innerHTML = '<span class="text-muted small">Pratinjau gambar</span>';
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            container.innerHTML = '<img src="'+e.target.result+'" style="width:100%;height:100%;object-fit:cover;">';
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
+
 <?= $this->endSection() ?>
