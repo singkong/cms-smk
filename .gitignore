@@ -33,3 +33,4 @@ Desktop.ini
 # Uploads (user content)
 public/uploads/*
 !public/uploads/.gitkeep
+*.zip
